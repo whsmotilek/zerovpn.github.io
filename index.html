@@ -1,85 +1,105 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваш VPN</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Логотип -->
-        <div class="logo">
-            <img src="logo.png" alt="VPN Logo">
-        </div>
+/* Подключение нового основного шрифта */
+body {
+    font-family: 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
 
-        <!-- Заголовок -->
-        <div class="title">Ваш VPN</div>
+.container {
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+}
 
-        <!-- Карточка статуса -->
-        <div class="card">
-            <div class="status">
-                <span>Статус</span>
-                <span class="active"><span class="dot"></span> Активна</span>
-            </div>
-            <div class="status">
-                <span>Трафик</span>
-                <span>2.26 GB / ∞</span>
-            </div>
-            <div class="status">
-                <span>Истекает</span>
-                <span>07.03.2025 18:27:04</span>
-            </div>
-            <div>
-                <a href="#" class="support-link">Техническая поддержка</a>
-            </div>
-            <div>
-                <a href="#" class="support-link">Ссылка для подключения</a>
-            </div>
-        </div>
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-        <!-- Инструкции -->
-        <div class="section">
-            <div class="section-title">Инструкция</div>
-            <div class="instructions">
-                <details>
-                    <summary>iOS</summary>
-                    <p>Инструкция для iOS.</p>
-                </details>
-                <details>
-                    <summary>Android</summary>
-                    <p>Инструкция для Android.</p>
-                </details>
-                <details>
-                    <summary>Windows</summary>
-                    <p>Инструкция для Windows.</p>
-                </details>
-                <details>
-                    <summary>macOS</summary>
-                    <p>Инструкция для macOS.</p>
-                </details>
-                <details>
-                    <summary>Linux</summary>
-                    <p>Инструкция для Linux.</p>
-                </details>
-            </div>
-        </div>
+.logo img {
+    max-width: 100px;
+}
 
-        <!-- Помощь -->
-        <div class="section">
-            <div class="section-title">Помощь</div>
-            <div class="help">
-                <details>
-                    <summary>Что такое подписка?</summary>
-                    <p>Ответ про подписку.</p>
-                </details>
-                <details>
-                    <summary>Хочу использовать другое приложение для подключения</summary>
-                    <p>Информация о настройке другого приложения.</p>
-                </details>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+.title {
+    text-align: center;
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-weight: 700; /* Жирный текст */
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-top: 1px solid #ddd;
+    font-size: 14px;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.status:first-child {
+    border-top: none;
+}
+
+.status a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.status a:hover {
+    text-decoration: underline;
+}
+
+.status .active {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+.instructions, .help {
+    margin-bottom: 20px;
+}
+
+.instructions-details, .help-details {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    border: 1px solid #ddd;
+}
+
+details {
+    padding: 12px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+details:last-child {
+    border-bottom: none;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+summary:hover {
+    color: #007BFF;
+}
+
+details p {
+    margin: 10px 0 0 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
