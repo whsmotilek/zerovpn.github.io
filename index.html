@@ -90,16 +90,14 @@
 
         .instructions-details, .help-details {
             background: #fff;
-            border-radius: 16px;
+            border-radius: 12px; /* Скругление углов */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
             border: 1px solid #ddd;
+            overflow: hidden; /* Для скрытия элементов за границей */
         }
 
         details {
-            padding: 12px 20px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
+            border-bottom: 1px solid #ddd; /* Разделительная линия */
         }
 
         details:last-child {
@@ -107,17 +105,71 @@
         }
 
         summary {
-            font-size: 14px;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         summary:hover {
-            color: #007BFF;
+            background-color: #e7e7e7; /* Изменение фона при наведении */
         }
 
-        details p {
-            margin: 10px 0 0 10px;
+        summary::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s; /* Анимация вращения */
+        }
+
+        details[open] summary::after {
+            transform: rotate(-180deg); /* Стрелка указывает вверх при открытии */
+        }
+
+        details .details-content {
+            padding: 15px 20px;
             font-size: 14px;
             line-height: 1.5;
+            color: #555;
+        }
+
+        .details-content h4 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .details-content p {
+            margin: 0 0 10px 0;
+        }
+
+        .details-content .link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 500;
+            border-top: 1px solid #ddd;
+        }
+
+        .details-content .link:last-child {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .details-content .link:hover {
+            text-decoration: underline;
+        }
+
+        .details-content .link::after {
+            content: '→';
+            font-size: 16px;
+            color: #333;
         }
     </style>
 </head>
@@ -135,7 +187,7 @@
         <div class="card">
             <div class="status">
                 <span>Статус</span>
-                <span class="active">Активна</span>
+                <span class="active">Активен</span>
             </div>
             <div class="status">
                 <span>Трафик</span>
@@ -159,23 +211,48 @@
             <div class="instructions-details">
                 <details>
                     <summary>iOS</summary>
-                    <p>Инструкция для iOS.</p>
+                    <div class="details-content">
+                        <h4>Streisand</h4>
+                        <p>Streisand - рекомендуемое приложение для iOS 14+.</p>
+                        <a class="link" href="#">Скачать в App Store</a>
+                        <a class="link" href="#">Добавить подписку</a>
+                    </div>
                 </details>
                 <details>
                     <summary>Android</summary>
-                    <p>Инструкция для Android.</p>
+                    <div class="details-content">
+                        <h4>WireGuard</h4>
+                        <p>WireGuard - рекомендуемое приложение для Android.</p>
+                        <a class="link" href="#">Скачать в Google Play</a>
+                        <a class="link" href="#">Добавить VPN-профиль</a>
+                    </div>
                 </details>
                 <details>
                     <summary>Windows</summary>
-                    <p>Инструкция для Windows.</p>
+                    <div class="details-content">
+                        <h4>Руководство</h4>
+                        <p>Полная инструкция для настройки VPN на Windows.</p>
+                        <a class="link" href="#">Скачать приложение</a>
+                        <a class="link" href="#">Настроить вручную</a>
+                    </div>
                 </details>
                 <details>
                     <summary>macOS</summary>
-                    <p>Инструкция для macOS.</p>
+                    <div class="details-content">
+                        <h4>Streisand</h4>
+                        <p>Streisand поддерживает macOS для версии 11+.</p>
+                        <a class="link" href="#">Скачать приложение</a>
+                        <a class="link" href="#">Добавить подписку</a>
+                    </div>
                 </details>
                 <details>
                     <summary>Linux</summary>
-                    <p>Инструкция для Linux.</p>
+                    <div class="details-content">
+                        <h4>OpenVPN</h4>
+                        <p>Для Linux лучше всего подходит приложение OpenVPN или WireGuard.</p>
+                        <a class="link" href="#">Скачать OpenVPN</a>
+                        <a class="link" href="#">Скачать WireGuard</a>
+                    </div>
                 </details>
             </div>
         </div>
