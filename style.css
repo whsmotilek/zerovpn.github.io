@@ -1,104 +1,128 @@
+/* Основные стили */
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #f9f9f9;
     color: #333;
 }
 
+/* Контейнер сайта */
 .container {
     width: 90%;
     max-width: 400px;
-    margin: 20px auto;
+    margin: 30px auto;
+    padding: 10px;
 }
 
+/* Логотип */
 .logo {
     text-align: center;
     margin-bottom: 20px;
 }
 
 .logo img {
-    max-width: 100px;
+    width: 80px;
+    height: auto;
 }
 
+/* Заголовок основного раздела */
 .title {
     text-align: center;
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-weight: 700; /* Жирный текст */
     font-size: 1.5rem;
+    font-weight: 700;
+    color: #222;
     margin-bottom: 20px;
 }
 
+/* Карточка - Статус сервиса */
 .card {
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    border: 1px solid #ddd;
 }
 
 .status {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
-    border-top: 1px solid #ddd;
+    margin: 10px 0;
     font-size: 14px;
-    font-family: 'Montserrat', Arial, sans-serif;
-}
-
-.status:first-child {
-    border-top: none;
-}
-
-.status a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.status a:hover {
-    text-decoration: underline;
 }
 
 .status .active {
-    color: #4caf50;
+    display: flex;
+    align-items: center;
     font-weight: bold;
+    color: #4caf50;
 }
 
-.instructions, .help {
+.status .dot {
+    width: 8px;
+    height: 8px;
+    background: #4caf50;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Ссылки */
+.support-link {
+    display: block;
+    color: #007BFF;
+    text-decoration: none;
+    margin: 6px 0;
+    font-size: 14px;
+}
+
+.support-link:hover {
+    text-decoration: underline;
+}
+
+/* Секции */
+.section {
     margin-bottom: 20px;
 }
 
-.instructions-details, .help-details {
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 10px;
-    border: 1px solid #ddd;
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #222;
 }
 
+/* Детали */
 details {
-    padding: 12px 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-details:last-child {
-    border-bottom: none;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    font-size: 14px;
 }
 
 summary {
+    padding: 12px 16px;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 summary:hover {
-    color: #007BFF;
+    background-color: #f0f0f0;
+    border-radius: 12px;
 }
 
 details p {
-    margin: 10px 0 0 10px;
+    padding: 10px 16px;
     font-size: 14px;
+    color: #555;
     line-height: 1.5;
+}
+
+/* Адаптивность */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
 }
