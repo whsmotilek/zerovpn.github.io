@@ -1,84 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ваш VPN</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 400px;
-            margin: 20px auto;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo img {
-            max-width: 100px;
-        }
-
-        .title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status span {
-            font-weight: bold;
-        }
-
-        .status .active {
-            color: #4caf50;
-            font-weight: bold;
-        }
-
-        .instructions {
-            margin-bottom: 20px;
-        }
-
-        .instructions-details, .help-details {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-        }
-
-        details {
-            padding: 10px 20px;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: bold;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -94,7 +21,7 @@
         <div class="card">
             <div class="status">
                 <span>Статус</span>
-                <span class="active">Активна</span>
+                <span class="active"><span class="dot"></span> Активна</span>
             </div>
             <div class="status">
                 <span>Трафик</span>
@@ -104,18 +31,18 @@
                 <span>Истекает</span>
                 <span>07.03.2025 18:27:04</span>
             </div>
-            <div class="status">
-                <a href="#">Техническая поддержка</a>
+            <div>
+                <a href="#" class="support-link">Техническая поддержка</a>
             </div>
-            <div class="status">
-                <a href="#">Ссылка для подключения</a>
+            <div>
+                <a href="#" class="support-link">Ссылка для подключения</a>
             </div>
         </div>
 
-        <!-- Инструкция -->
-        <div class="instructions">
-            <div class="title">Инструкция</div>
-            <div class="instructions-details">
+        <!-- Инструкции -->
+        <div class="section">
+            <div class="section-title">Инструкция</div>
+            <div class="instructions">
                 <details>
                     <summary>iOS</summary>
                     <p>Инструкция для iOS.</p>
@@ -140,9 +67,9 @@
         </div>
 
         <!-- Помощь -->
-        <div class="help">
-            <div class="title">Помощь</div>
-            <div class="help-details">
+        <div class="section">
+            <div class="section-title">Помощь</div>
+            <div class="help">
                 <details>
                     <summary>Что такое подписка?</summary>
                     <p>Ответ про подписку.</p>
