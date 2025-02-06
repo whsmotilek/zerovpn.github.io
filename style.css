@@ -1,13 +1,16 @@
-/* Основные стили */
+/* Общие стили */
 body {
     font-family: 'Montserrat', Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f9f9f9;
     color: #333;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-/* Контейнер сайта */
+/* Контейнер */
 .container {
     width: 90%;
     max-width: 400px;
@@ -24,9 +27,14 @@ body {
 .logo img {
     width: 80px;
     height: auto;
+    transition: transform 0.3s ease;
 }
 
-/* Заголовок основного раздела */
+.logo img:hover {
+    transform: scale(1.1);
+}
+
+/* Заголовок */
 .title {
     text-align: center;
     font-size: 1.5rem;
@@ -35,13 +43,19 @@ body {
     margin-bottom: 20px;
 }
 
-/* Карточка - Статус сервиса */
+/* Карточка - Статус системы */
 .card {
     background: #fff;
     border-radius: 16px;
     padding: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .status {
@@ -67,16 +81,17 @@ body {
     margin-right: 8px;
 }
 
-/* Ссылки */
 .support-link {
     display: block;
     color: #007BFF;
     text-decoration: none;
     margin: 6px 0;
     font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .support-link:hover {
+    color: #0056b3;
     text-decoration: underline;
 }
 
@@ -92,9 +107,7 @@ body {
     color: #222;
 }
 
-/* Основные стили остаются неизменными... */
-
-/* Стили для выпадающего списка */
+/* Выпадающий список (details) */
 details {
     position: relative;
     background: #fff;
@@ -119,8 +132,9 @@ summary {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    list-style: none; /* убираем стандартный маркер */
-    outline: none;
+    list-style: none; /* убираем маркер */
+    outline: none; /* убираем обводку */
+    transition: background-color 0.3s ease;
 }
 
 summary:hover {
@@ -129,7 +143,7 @@ summary:hover {
 }
 
 summary::after {
-    content: '▼'; /* Указатель вниз */
+    content: '▼'; /* Стрелочка вниз */
     font-size: 0.8rem;
     color: #666;
     transition: transform 0.3s ease-in-out;
@@ -139,10 +153,9 @@ details[open] summary::after {
     transform: rotate(180deg); /* Вращение стрелки вверх */
 }
 
-/* Скрытая часть (контент выпадающего списка) */
 details p {
     margin: 0;
-    padding: 0 16px; /* Отступы для текста */
+    padding: 0 16px;
     font-size: 14px;
     color: #555;
     line-height: 1.5;
@@ -152,20 +165,28 @@ details p {
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* Когда открыто, плавно раскрываем */
 details[open] p {
-    max-height: 300px; /* Устанавливайте максимальную высоту, исходя из контента */
+    max-height: 300px; /* Максимальная высота для контента */
     opacity: 1;
-    padding: 10px 16px; /* Плавно добавляем отступ */
+    padding: 10px 16px;
 }
 
-/* Анимация стрелки, общий переход */
+/* Анимация стрелки и общие эффекты */
 details[open] summary {
-    color: #222; /* Делаем заголовок чуть темнее при раскрытии */
+    color: #222; /* Заголовок становится темнее при раскрытии */
 }
+
 /* Адаптивность */
 @media screen and (max-width: 768px) {
     .container {
         width: 95%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
