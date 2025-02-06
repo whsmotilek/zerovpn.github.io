@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ваш VPN</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f5f5f5;
@@ -47,6 +48,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 14px;
+            padding: 8px 0;
         }
 
         .status span {
@@ -56,6 +59,16 @@
         .status .active {
             color: #4caf50;
             font-weight: bold;
+        }
+
+        .status a {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .status a:hover {
+            text-decoration: underline;
         }
 
         .instructions {
@@ -71,11 +84,18 @@
 
         details {
             padding: 10px 20px;
+            font-size: 14px;
         }
 
         summary {
             cursor: pointer;
             font-weight: bold;
+        }
+
+        details p {
+            margin: 10px 0 0 10px;
+            font-size: 14px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -83,7 +103,7 @@
     <div class="container">
         <!-- Логотип -->
         <div class="logo">
-            <img src="logo.svg" alt="VPN Logo">
+            <img src="logo.png" alt="VPN Logo">
         </div>
 
         <!-- Заголовок -->
