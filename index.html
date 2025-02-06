@@ -30,66 +30,88 @@
         }
 
         .title {
-            text-align: center;
+            text-align: left;
             font-weight: bold;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin: 10px 0;
         }
 
         .card {
             background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-bottom: 20px;
+            border: 1px solid #ddd;
         }
 
         .status {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
             font-size: 14px;
-            padding: 8px 0;
         }
 
-        .status span {
-            font-weight: bold;
-        }
-
-        .status .active {
-            color: #4caf50;
-            font-weight: bold;
+        .status:first-child {
+            border-top: none;
         }
 
         .status a {
             color: #007BFF;
             text-decoration: none;
-            font-size: 14px;
         }
 
         .status a:hover {
             text-decoration: underline;
         }
 
-        .instructions {
+        .status .active {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: #4caf50;
+        }
+
+        .status .active::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .instructions, .help {
             margin-bottom: 20px;
         }
 
         .instructions-details, .help-details {
             background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             margin-top: 10px;
+            border: 1px solid #ddd;
         }
 
         details {
-            padding: 10px 20px;
-            font-size: 14px;
+            padding: 12px 20px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        details:last-child {
+            border-bottom: none;
         }
 
         summary {
-            cursor: pointer;
-            font-weight: bold;
+            font-size: 14px;
+        }
+
+        summary:hover {
+            color: #007BFF;
         }
 
         details p {
@@ -117,7 +139,7 @@
             </div>
             <div class="status">
                 <span>Трафик</span>
-                <span>2.26 GB / ∞</span>
+                <span>3.01 GB / ∞</span>
             </div>
             <div class="status">
                 <span>Истекает</span>
