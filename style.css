@@ -92,13 +92,22 @@ body {
     color: #222;
 }
 
-/* Детали */
+/* Основные стили остаются неизменными... */
+
+/* Стили для выпадающего списка */
 details {
+    position: relative;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
     font-size: 14px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+details[open] {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 summary {
@@ -106,6 +115,12 @@ summary {
     cursor: pointer;
     font-weight: 500;
     color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    list-style: none; /* убираем стандартный маркер */
+    outline: none;
 }
 
 summary:hover {
@@ -113,13 +128,41 @@ summary:hover {
     border-radius: 12px;
 }
 
+summary::after {
+    content: '▼'; /* Указатель вниз */
+    font-size: 0.8rem;
+    color: #666;
+    transition: transform 0.3s ease-in-out;
+}
+
+details[open] summary::after {
+    transform: rotate(180deg); /* Вращение стрелки вверх */
+}
+
+/* Скрытая часть (контент выпадающего списка) */
 details p {
-    padding: 10px 16px;
+    margin: 0;
+    padding: 0 16px; /* Отступы для текста */
     font-size: 14px;
     color: #555;
     line-height: 1.5;
+    max-height: 0px;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
+/* Когда открыто, плавно раскрываем */
+details[open] p {
+    max-height: 300px; /* Устанавливайте максимальную высоту, исходя из контента */
+    opacity: 1;
+    padding: 10px 16px; /* Плавно добавляем отступ */
+}
+
+/* Анимация стрелки, общий переход */
+details[open] summary {
+    color: #222; /* Делаем заголовок чуть темнее при раскрытии */
+}
 /* Адаптивность */
 @media screen and (max-width: 768px) {
     .container {
