@@ -20,6 +20,17 @@
             color: #333;
         }
 
+        .header {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .header span {
+            font-weight: bold;
+        }
+
         .container {
             width: 90%;
             max-width: 400px;
@@ -181,6 +192,11 @@
     </style>
 </head>
 <body>
+    <!-- Заголовок с данными пользователя -->
+    <div class="header" id="user-header" style="display:none;">
+        Пользователь: <span id="user-id"></span> | <span id="user-fullname"></span>
+    </div>
+
     <div class="container">
         <!-- Логотип -->
         <div class="logo">
@@ -222,10 +238,17 @@
     <script>
         // После успешной авторизации
         function onTelegramAuth(user) {
-            // Показываем данные пользователя
+            // Показываем данные пользователя в заголовке
+            document.getElementById('user-id').innerText = user.id; // UID пользователя
+            document.getElementById('user-fullname').innerText = user.first_name + ' ' + (user.last_name || '');
+
+            // Показываем заголовок и скрываем Telegram-виджет
+            document.getElementById('user-header').style.display = "block";
+            document.getElementById('telegram-login-widget').style.display = "none";
+
+            // Показываем данные пользователя на странице
             document.getElementById('username').innerText = user.first_name + ' ' + (user.last_name || '');
-            document.getElementById('telegram-login-widget').style.display = "none"; // Прячем Telegram виджет
-            document.getElementById('user-data').style.display = "block"; // Показываем контент
+            document.getElementById('user-data').style.display = "block";
         }
     </script>
 </body>
