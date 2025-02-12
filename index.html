@@ -9,8 +9,8 @@
         data-telegram-login="zero_vpn_bot" 
         data-size="large" 
         data-radius="10" 
-        data-auth-url="#" 
-        data-request-access="write"></script> <!-- Укажите свой redirect URL -->
+        data-auth-url="https://example.com/auth" <!-- Замените на ваш URL -->
+        data-request-access="write"></script>
     <style>
         /* Стили для красоты */
         body {
@@ -113,22 +113,51 @@
     </div>
 
     <script>
-        // Действия после авторизации
-        function onTelegramAuth(user) {
-            console.log(user); // Выводим все данные пользователя в консоль (для отладки)
+        // Проверка, была ли авторизация выполнена через Telegram
+        async function fetchUserData(authUrl) {
+            // Параметры, переданные виджетом
+            const hashParams = new URLSearchParams(window.location.search);
+            const userData = {};
+            hashParams.forEach((value, key) => {
+                userData[key] = value;
+            });
 
-            // Заполняем данные пользователя
-            document.getElementById('user-id').innerText = user.id; 
-            document.getElementById('user-fullname').innerText = user.first_name + ' ' + (user.last_name || '');
+            if (!userData.hash) {
+                console.log("Нет данных авторизации");
+                return null;
+            }
 
-            // Отображаем заголовок и скрываем виджет
-            document.getElementById('user-header').style.display = "block";
-            document.getElementById('telegram-login-widget').style.display = "none";
-
-            // Отображаем контейнер с данными
-            document.getElementById('username').innerText = user.first_name + ' ' + (user.last_name || '');
-            document.getElementById('user-data').style.display = "block";
+            // Данные получены, отправляем их на сервер (замените на свой backend)
+            // AJAX-запрос (server-side validation)
+            try {
+                const response = await fetch(authUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData),
+                });
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error("Ошибка при отправке данных на сервер:", error);
+                return null;
+            }
         }
+
+        async function handleTelegramLogin() {
+            const authUrl = "https://example.com/auth"; // Замените на ваш API back-end
+            const user = await fetchUserData(authUrl);
+
+            if (user) {
+                console.log(user); // Ваша логика работы
+                document.getElementById('user-id').innerText = user.id;
+                document.getElementById('user-fullname').innerText = user.first_name + ' ' + (user.last_name || '');
+                document.getElementById('telegram-login-widget').style.display = "none";
+                document.getElementById('user-data').style.display = "block";
+            }
+        }
+
+        // Вызываем авторизацию сразу при загрузке
+        handleTelegramLogin();
     </script>
 </body>
 </html>
