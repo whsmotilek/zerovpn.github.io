@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ваш VPN</title>
+    <script async src="https://telegram.org/js/telegram-widget.js?7" 
+        data-telegram-login="ВАШ_БОТ_USERNAME" 
+        data-size="large" 
+        data-radius="10" 
+        data-auth-url="ВАШ_СЕРВЕР_URL" 
+        data-request-access="write"></script>
     <style>
         body {
             font-family: 'Montserrat', Arial, sans-serif;
@@ -18,6 +24,7 @@
             width: 90%;
             max-width: 400px;
             margin: 20px auto;
+            text-align: center;
         }
 
         .logo {
@@ -90,14 +97,14 @@
 
         .instructions-details, .help-details {
             background: #fff;
-            border-radius: 12px; /* Скругление углов */
+            border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border: 1px solid #ddd;
-            overflow: hidden; /* Для скрытия элементов за границей */
+            overflow: hidden;
         }
 
         details {
-            border-bottom: 1px solid #ddd; /* Разделительная линия */
+            border-bottom: 1px solid #ddd;
         }
 
         details:last-child {
@@ -116,17 +123,17 @@
         }
 
         summary:hover {
-            background-color: #e7e7e7; /* Изменение фона при наведении */
+            background-color: #e7e7e7; 
         }
 
         summary::after {
             content: '▼';
             font-size: 12px;
-            transition: transform 0.3s; /* Анимация вращения */
+            transition: transform 0.3s;
         }
 
         details[open] summary::after {
-            transform: rotate(-180deg); /* Стрелка указывает вверх при открытии */
+            transform: rotate(-180deg);
         }
 
         details .details-content {
@@ -177,100 +184,49 @@
     <div class="container">
         <!-- Логотип -->
         <div class="logo">
-            <img src="logo.png">
+            <img src="logo.svg" alt="Логотип">
         </div>
 
-        <!-- Заголовок -->
-        <div class="title">Ваш VPN</div>
-
-        <!-- Карточка статуса -->
-        <div class="card">
-            <div class="status">
-                <span>Статус</span>
-                <span class="active">Активен</span>
-            </div>
-            <div class="status">
-                <span>Трафик</span>
-                <span>3.01 GB / ∞</span>
-            </div>
-            <div class="status">
-                <span>Истекает</span>
-                <span>07.03.2025 18:27:04</span>
-            </div>
-            <div class="status">
-                <a href="#">Техническая поддержка</a>
-            </div>
-            <div class="status">
-                <a href="#">Ссылка для подключения</a>
-            </div>
+        <!-- Telegram Login -->
+        <div id="telegram-login-widget">
+            <!-- Telegram виджет будет загружен здесь -->
         </div>
 
-        <!-- Инструкция -->
-        <div class="instructions">
-            <div class="title">Инструкция</div>
-            <div class="instructions-details">
-                <details>
-                    <summary>iOS</summary>
-                    <div class="details-content">
-                        <h4>Streisand</h4>
-                        <p>Streisand - рекомендуемое приложение для iOS 14+.</p>
-                        <a class="link" href="#">Скачать в App Store</a>
-                        <a class="link" href="#">Добавить подписку</a>
-                    </div>
-                </details>
-                <details>
-                    <summary>Android</summary>
-                    <div class="details-content">
-                        <h4>WireGuard</h4>
-                        <p>WireGuard - рекомендуемое приложение для Android.</p>
-                        <a class="link" href="#">Скачать в Google Play</a>
-                        <a class="link" href="#">Добавить VPN-профиль</a>
-                    </div>
-                </details>
-                <details>
-                    <summary>Windows</summary>
-                    <div class="details-content">
-                        <h4>Руководство</h4>
-                        <p>Полная инструкция для настройки VPN на Windows.</p>
-                        <a class="link" href="#">Скачать приложение</a>
-                        <a class="link" href="#">Настроить вручную</a>
-                    </div>
-                </details>
-                <details>
-                    <summary>macOS</summary>
-                    <div class="details-content">
-                        <h4>Streisand</h4>
-                        <p>Streisand поддерживает macOS для версии 11+.</p>
-                        <a class="link" href="#">Скачать приложение</a>
-                        <a class="link" href="#">Добавить подписку</a>
-                    </div>
-                </details>
-                <details>
-                    <summary>Linux</summary>
-                    <div class="details-content">
-                        <h4>OpenVPN</h4>
-                        <p>Для Linux лучше всего подходит приложение OpenVPN или WireGuard.</p>
-                        <a class="link" href="#">Скачать OpenVPN</a>
-                        <a class="link" href="#">Скачать WireGuard</a>
-                    </div>
-                </details>
-            </div>
-        </div>
-
-        <!-- Помощь -->
-        <div class="help">
-            <div class="title">Помощь</div>
-            <div class="help-details">
-                <details>
-                    <summary>Что такое подписка?</summary>
-                    <p>Ответ про подписку.</p>
-                </details>
-                <details>
-                    <summary>Хочу использовать другое приложение для подключения</summary>
-                    <p>Информация о настройке другого приложения.</p>
-                </details>
+        <!-- Подгружаемый контент после успешной авторизации -->
+        <div id="user-data" style="display:none;">
+            <!-- Здесь будут находиться данные пользователя и контент после авторизации -->
+            <div class="title">Добро пожаловать, <span id="username"></span></div>
+            <div class="card">
+                <div class="status">
+                    <span>Статус</span>
+                    <span class="active">Активен</span>
+                </div>
+                <div class="status">
+                    <span>Трафик</span>
+                    <span>3.01 GB / ∞</span>
+                </div>
+                <div class="status">
+                    <span>Истекает</span>
+                    <span>07.03.2025 18:27:04</span>
+                </div>
+                <div class="status">
+                    <a href="#">Техническая поддержка</a>
+                </div>
+                <div class="status">
+                    <a href="#">Ссылка для подключения</a>
+                </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // После успешной авторизации
+        function onTelegramAuth(user) {
+            // Показываем данные пользователя
+            document.getElementById('username').innerText = user.first_name + ' ' + (user.last_name || '');
+            document.getElementById('telegram-login-widget').style.display = "none"; // Прячем Telegram виджет
+            document.getElementById('user-data').style.display = "block"; // Показываем контент
+        }
+    </script>
 </body>
 </html>
