@@ -4,8 +4,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваш VPN</title>
+    <title>Авторизация через Telegram</title>
+    <script async src="https://telegram.org/js/telegram-widget.js?7" 
+        data-telegram-login="zero_vpn_bot" 
+        data-size="large" 
+        data-radius="10" 
+        data-auth-url="#" 
+        data-request-access="write"></script> <!-- Укажите свой redirect URL -->
     <style>
+        /* Стили для красоты */
         body {
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
@@ -32,15 +39,6 @@
             text-align: center;
         }
 
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo img {
-            max-width: 100px;
-        }
-
         .title {
             text-align: left;
             font-weight: bold;
@@ -53,21 +51,14 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
+            margin-top: 20px;
         }
 
         .status {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 10px 0;
-            border-top: 1px solid #ddd;
-            font-size: 14px;
-        }
-
-        .status:first-child {
-            border-top: none;
+            font-size: 16px;
         }
 
         .status a {
@@ -80,131 +71,23 @@
         }
 
         .status .active {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
             color: #4caf50;
-        }
-
-        .status .active::before {
-            content: '';
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #4caf50;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-
-        .instructions, .help {
-            margin-bottom: 20px;
-        }
-
-        .instructions-details, .help-details {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border: 1px solid #ddd;
-            overflow: hidden;
-        }
-
-        details {
-            border-bottom: 1px solid #ddd;
-        }
-
-        details:last-child {
-            border-bottom: none;
-        }
-
-        summary {
-            padding: 15px 20px;
-            font-weight: bold;
-            font-size: 16px;
-            background-color: #f0f0f0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        summary:hover {
-            background-color: #e7e7e7; 
-        }
-
-        summary::after {
-            content: '▼';
-            font-size: 12px;
-            transition: transform 0.3s;
-        }
-
-        details[open] summary::after {
-            transform: rotate(-180deg);
-        }
-
-        details .details-content {
-            padding: 15px 20px;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #555;
-        }
-
-        .details-content h4 {
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0;
-            margin-bottom: 10px;
-        }
-
-        .details-content p {
-            margin: 0 0 10px 0;
-        }
-
-        .details-content .link {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            color: #007BFF;
-            text-decoration: none;
-            font-weight: 500;
-            border-top: 1px solid #ddd;
-        }
-
-        .details-content .link:last-child {
-            border-bottom: 1px solid #ddd;
-        }
-
-        .details-content .link:hover {
-            text-decoration: underline;
-        }
-
-        .details-content .link::after {
-            content: '→';
-            font-size: 16px;
-            color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- Заголовок с данными пользователя -->
+    <!-- Заголовок будет отображаться после авторизации -->
     <div class="header" id="user-header" style="display:none;">
         Пользователь: <span id="user-id"></span> | <span id="user-fullname"></span>
     </div>
 
     <div class="container">
-        <!-- Логотип -->
-        <div class="logo">
-            <img src="logo.svg" alt="Логотип">
-        </div>
-
-        <!-- Telegram Login -->
         <div id="telegram-login-widget">
-            <!-- Telegram виджет будет загружен здесь -->
+            <!-- Telegram Login Widget -->
         </div>
 
-        <!-- Подгружаемый контент после успешной авторизации -->
+        <!-- Данные после авторизации -->
         <div id="user-data" style="display:none;">
-            <!-- Здесь будут находиться данные пользователя и контент после авторизации -->
             <div class="title">Добро пожаловать, <span id="username"></span></div>
             <div class="card">
                 <div class="status">
@@ -230,17 +113,19 @@
     </div>
 
     <script>
-        // После успешной авторизации
+        // Действия после авторизации
         function onTelegramAuth(user) {
-            // Показываем данные пользователя в заголовке
-            document.getElementById('user-id').innerText = user.id; // UID пользователя
+            console.log(user); // Выводим все данные пользователя в консоль (для отладки)
+
+            // Заполняем данные пользователя
+            document.getElementById('user-id').innerText = user.id; 
             document.getElementById('user-fullname').innerText = user.first_name + ' ' + (user.last_name || '');
 
-            // Показываем заголовок и скрываем Telegram-виджет
+            // Отображаем заголовок и скрываем виджет
             document.getElementById('user-header').style.display = "block";
             document.getElementById('telegram-login-widget').style.display = "none";
 
-            // Показываем данные пользователя на странице
+            // Отображаем контейнер с данными
             document.getElementById('username').innerText = user.first_name + ' ' + (user.last_name || '');
             document.getElementById('user-data').style.display = "block";
         }
