@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация через Telegram</title>
-    <script async src="https://telegram.org/js/telegram-widget.js?7" 
-        data-telegram-login="zero_vpn_bot" 
-        data-size="large" 
-        data-radius="10" 
-        data-auth-url="https://example.com/auth" <!-- Замените на ваш URL -->
-        data-request-access="write"></script>
+    <title>Ваш VPN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Стили для красоты */
         body {
             font-family: 'Montserrat', Arial, sans-serif;
             margin: 0;
@@ -21,22 +14,19 @@
             color: #333;
         }
 
-        .header {
-            background-color: #007BFF;
-            color: #fff;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .header span {
-            font-weight: bold;
-        }
-
         .container {
             width: 90%;
             max-width: 400px;
             margin: 20px auto;
+        }
+
+        .logo {
             text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 100px;
         }
 
         .title {
@@ -51,14 +41,21 @@
             border-radius: 16px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
         }
 
         .status {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
-            font-size: 16px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .status:first-child {
+            border-top: none;
         }
 
         .status a {
@@ -71,93 +68,220 @@
         }
 
         .status .active {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
             color: #4caf50;
+        }
+
+        .status .active::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .instructions, .help {
+            margin-bottom: 20px;
+        }
+
+        .instructions-details, .help-details {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        details {
+            border-bottom: 1px solid #ddd;
+        }
+
+        details:last-child {
+            border-bottom: none;
+        }
+
+        summary {
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #f0f0f0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        summary:hover {
+            background-color: #e7e7e7;
+        }
+
+        summary::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            transform: rotate(-180deg);
+        }
+
+        details .details-content {
+            padding: 15px 20px;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .details-content h4 {
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        .details-content p {
+            margin: 0 0 10px 0;
+        }
+
+        .details-content .link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: 500;
+            border-top: 1px solid #ddd;
+        }
+
+        .details-content .link:last-child {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .details-content .link:hover {
+            text-decoration: underline;
+        }
+
+        .details-content .link::after {
+            content: '→';
+            font-size: 16px;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <!-- Заголовок будет отображаться после авторизации -->
-    <div class="header" id="user-header" style="display:none;">
-        Пользователь: <span id="user-id"></span> | <span id="user-fullname"></span>
-    </div>
-
     <div class="container">
-        <div id="telegram-login-widget">
-            <!-- Telegram Login Widget -->
+        <!-- Логотип -->
+        <div class="logo">
+            <img src="logo.svg" alt="Логотип">
         </div>
 
-        <!-- Данные после авторизации -->
-        <div id="user-data" style="display:none;">
-            <div class="title">Добро пожаловать, <span id="username"></span></div>
-            <div class="card">
-                <div class="status">
-                    <span>Статус</span>
-                    <span class="active">Активен</span>
-                </div>
-                <div class="status">
-                    <span>Трафик</span>
-                    <span>3.01 GB / ∞</span>
-                </div>
-                <div class="status">
-                    <span>Истекает</span>
-                    <span>07.03.2025 18:27:04</span>
-                </div>
-                <div class="status">
-                    <a href="#">Техническая поддержка</a>
-                </div>
-                <div class="status">
-                    <a href="#">Ссылка для подключения</a>
-                </div>
+        <!-- Заголовок -->
+        <div class="title">Ваш VPN</div>
+
+        <!-- Карточка статуса -->
+        <div class="card">
+            <div class="status">
+                <span>Статус</span>
+                <span class="active">Активен</span>
+            </div>
+            <div class="status">
+                <span>Трафик</span>
+                <span>3.01 GB / ∞</span>
+            </div>
+            <div class="status">
+                <span>Истекает</span>
+                <span>07.03.2025 18:27:04</span>
+            </div>
+            <div class="status">
+                <a href="#">Техническая поддержка</a>
+            </div>
+            <div class="status">
+                <a href="#">Ссылка для подключения</a>
+            </div>
+        </div>
+
+        <!-- Инструкция -->
+        <div class="instructions">
+            <div class="title">Инструкция</div>
+            <div class="instructions-details">
+                <details>
+                    <summary>iOS</summary>
+                    <div class="details-content">
+                        <h4>Streisand</h4>
+                        <p>Streisand - рекомендуемое приложение для iOS 14+.</p>
+                        <a class="link" href="#">Скачать в App Store</a>
+                        <a class="link" href="#">Добавить подписку</a>
+                    </div>
+                </details>
+                <details>
+                    <summary>Android</summary>
+                    <div class="details-content">
+                        <h4>WireGuard</h4>
+                        <p>WireGuard - рекомендуемое приложение для Android.</p>
+                        <a class="link" href="#">Скачать в Google Play</a>
+                        <a class="link" href="#">Добавить VPN-профиль</a>
+                    </div>
+                </details>
+                <details>
+                    <summary>Windows</summary>
+                    <div class="details-content">
+                        <h4>Руководство</h4>
+                        <p>Полная инструкция для настройки VPN на Windows.</p>
+                        <a class="link" href="#">Скачать приложение</a>
+                        <a class="link" href="#">Настроить вручную</a>
+                    </div>
+                </details>
+                <details>
+                    <summary>macOS</summary>
+                    <div class="details-content">
+                        <h4>Streisand</h4>
+                        <p>Streisand поддерживает macOS для версии 11+.</p>
+                        <a class="link" href="#">Скачать приложение</a>
+                        <a class="link" href="#">Добавить подписку</a>
+                    </div>
+                </details>
+                <details>
+                    <summary>Linux</summary>
+                    <div class="details-content">
+                        <h4>OpenVPN</h4>
+                        <p>Для Linux лучше всего подходит приложение OpenVPN или WireGuard.</p>
+                        <a class="link" href="#">Скачать OpenVPN</a>
+                        <a class="link" href="#">Скачать WireGuard</a>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Помощь -->
+        <div class="help">
+            <div class="title">Помощь</div>
+            <div class="help-details">
+                <details>
+                    <summary>Что такое подписка?</summary>
+                    <div class="details-content">
+                        <p>Ответ про подписку.</p>
+                    </div>
+                </details>
+                <details>
+                    <summary>Хочу использовать другое приложение для подключения</summary>
+                    <div class="details-content">
+                        <p>Информация о настройке другого приложения.</p>
+                    </div>
+                </details>
             </div>
         </div>
     </div>
 
     <script>
-        // Проверка, была ли авторизация выполнена через Telegram
-        async function fetchUserData(authUrl) {
-            // Параметры, переданные виджетом
-            const hashParams = new URLSearchParams(window.location.search);
-            const userData = {};
-            hashParams.forEach((value, key) => {
-                userData[key] = value;
-            });
-
-            if (!userData.hash) {
-                console.log("Нет данных авторизации");
-                return null;
-            }
-
-            // Данные получены, отправляем их на сервер (замените на свой backend)
-            // AJAX-запрос (server-side validation)
-            try {
-                const response = await fetch(authUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(userData),
-                });
-                const result = await response.json();
-                return result;
-            } catch (error) {
-                console.error("Ошибка при отправке данных на сервер:", error);
-                return null;
-            }
+        window.onload = initializeApp; // Функция для инициализации
+        function initializeApp() {
+            console.log("Приложение загружено"); // Пример функции
         }
-
-        async function handleTelegramLogin() {
-            const authUrl = "https://example.com/auth"; // Замените на ваш API back-end
-            const user = await fetchUserData(authUrl);
-
-            if (user) {
-                console.log(user); // Ваша логика работы
-                document.getElementById('user-id').innerText = user.id;
-                document.getElementById('user-fullname').innerText = user.first_name + ' ' + (user.last_name || '');
-                document.getElementById('telegram-login-widget').style.display = "none";
-                document.getElementById('user-data').style.display = "block";
-            }
-        }
-
-        // Вызываем авторизацию сразу при загрузке
-        handleTelegramLogin();
     </script>
 </body>
 </html>
