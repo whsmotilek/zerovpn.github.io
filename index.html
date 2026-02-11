@@ -2,19 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZINC PRO | Гальваническое цинкование премиум-класса</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>ZINC PRO | Гальваническое цинкование</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #0a0a0a;
             --secondary: #1a1a1a;
@@ -23,31 +18,29 @@
             --text: #f5f5f5;
             --text-muted: #888;
         }
-        
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
             background: var(--primary);
             color: var(--text);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-display { font-family: 'Playfair Display', serif; }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .mobile-padding { padding-left: 1rem; padding-right: 1rem; }
+            .mobile-text-sm { font-size: 0.875rem; }
+            .mobile-text-base { font-size: 1rem; }
+            .mobile-text-2xl { font-size: 1.5rem; }
+            .mobile-text-3xl { font-size: 1.875rem; }
+            .mobile-hidden { display: none !important; }
+            .mobile-full { width: 100%; }
+            .mobile-stack { flex-direction: column; }
         }
         
-        .font-display {
-            font-family: 'Playfair Display', serif;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--primary);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-        
-        /* Metallic Gradient Text */
+        /* Metallic text */
         .metallic-text {
             background: linear-gradient(135deg, #c9a962 0%, #f0e6d2 50%, #c9a962 100%);
             -webkit-background-clip: text;
@@ -55,56 +48,27 @@
             background-clip: text;
         }
         
-        /* Liquid Metal Effect */
-        .liquid-bg {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .liquid-bg::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(201,169,98,0.1) 0%, transparent 70%);
-            animation: liquidMove 20s ease-in-out infinite;
-        }
-        
-        @keyframes liquidMove {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(30px, -30px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
-        }
-        
-        /* Zinc Particle Canvas */
-        #zincCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.4;
-        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
         
         /* Navigation */
         .nav-glass {
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(201, 169, 98, 0.1);
         }
         
-        /* Hero Section */
+        /* Hero section */
         .hero-section {
             min-height: 100vh;
             position: relative;
             display: flex;
             align-items: center;
             overflow: hidden;
+            background: linear-gradient(to bottom, #0a0a0a 0%, #1a1a1a 100%);
         }
         
         .hero-grid {
@@ -113,10 +77,17 @@
             background-image: 
                 linear-gradient(rgba(201, 169, 98, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(201, 169, 98, 0.03) 1px, transparent 1px);
-            background-size: 100px 100px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: center top;
-            animation: gridMove 20s linear infinite;
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-grid {
+                background-size: 100px 100px;
+                transform: perspective(500px) rotateX(60deg);
+                transform-origin: center top;
+                animation: gridMove 20s linear infinite;
+            }
         }
         
         @keyframes gridMove {
@@ -124,215 +95,134 @@
             100% { transform: perspective(500px) rotateX(60deg) translateY(100px); }
         }
         
-        /* Process Steps */
+        /* Mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        
+        /* Service cards */
+        .service-card {
+            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid rgba(201, 169, 98, 0.1);
+            transition: all 0.3s ease;
+        }
+        .service-card:active { transform: scale(0.98); }
+        
+        @media (min-width: 768px) {
+            .service-card:hover {
+                border-color: rgba(201, 169, 98, 0.3);
+                transform: translateY(-5px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            }
+        }
+        
+        /* Process timeline */
         .process-line {
             position: absolute;
-            left: 50%;
+            left: 24px;
             top: 0;
             bottom: 0;
             width: 2px;
             background: linear-gradient(to bottom, transparent, var(--accent), transparent);
-            transform: translateX(-50%);
         }
         
-        .process-node {
-            position: relative;
-            z-index: 10;
+        @media (min-width: 768px) {
+            .process-line { left: 50%; transform: translateX(-50%); }
         }
         
         .process-node::before {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 20px;
-            height: 20px;
+            left: 24px;
+            top: 24px;
+            width: 16px;
+            height: 16px;
             background: var(--accent);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 30px rgba(201, 169, 98, 0.5);
-            animation: pulse 2s ease-in-out infinite;
+            transform: translateX(-50%);
+            box-shadow: 0 0 20px rgba(201, 169, 98, 0.5);
         }
         
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 98, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(201, 169, 98, 0.8); }
+        @media (min-width: 768px) {
+            .process-node::before { left: 50%; }
         }
         
-        /* Service Cards */
-        .service-card {
-            background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
-            border: 1px solid rgba(201, 169, 98, 0.1);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(201, 169, 98, 0.1), transparent);
-            transition: left 0.7s;
-        }
-        
-        .service-card:hover::before {
-            left: 100%;
-        }
-        
-        .service-card:hover {
-            border-color: rgba(201, 169, 98, 0.3);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(201, 169, 98, 0.1);
-        }
-        
-        /* Electrolysis Animation */
-        .electrolysis-container {
-            position: relative;
-            height: 400px;
-            background: linear-gradient(to bottom, #1a1a1a 0%, #0a0a0a 100%);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .bubble {
-            position: absolute;
-            background: radial-gradient(circle at 30% 30%, rgba(201, 169, 98, 0.8), rgba(201, 169, 98, 0.2));
-            border-radius: 50%;
-            animation: rise 4s ease-in infinite;
-        }
-        
-        @keyframes rise {
-            0% { transform: translateY(400px) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(-100px) scale(1); opacity: 0; }
-        }
-        
-        /* Stats Counter */
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #c9a962, #f0e6d2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Magnetic Button */
+        /* Buttons */
         .magnetic-btn {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem 3rem;
+            padding: 1rem 2rem;
             background: transparent;
             border: 2px solid var(--accent);
             color: var(--accent);
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            overflow: hidden;
             transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .magnetic-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
             width: 100%;
-            height: 100%;
-            background: var(--accent);
-            transition: left 0.4s;
-            z-index: -1;
         }
         
-        .magnetic-btn:hover::before {
-            left: 0;
+        @media (min-width: 768px) {
+            .magnetic-btn { width: auto; padding: 1.25rem 2.5rem; }
         }
         
-        .magnetic-btn:hover {
-            color: var(--primary);
-        }
+        .magnetic-btn:active { background: var(--accent); color: var(--primary); }
         
-        /* Form Styling */
+        /* Form inputs */
         .input-field {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(201, 169, 98, 0.2);
             color: var(--text);
             transition: all 0.3s;
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border-radius: 0.75rem;
+            font-size: 16px; /* Prevent zoom on iOS */
         }
         
         .input-field:focus {
             outline: none;
             border-color: var(--accent);
             background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(201, 169, 98, 0.1);
         }
         
-        /* Reveal Animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
+        /* Image containers */
+        .img-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            background: #1a1a1a;
         }
         
-        /* Custom Cursor */
-        .custom-cursor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--accent);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.2s, background 0.2s;
-            mix-blend-mode: difference;
-        }
-        
-        .custom-cursor.hover {
-            transform: scale(2);
-            background: var(--accent);
-        }
-        
-        /* Industrial Texture */
-        .industrial-texture {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .img-container img {
             width: 100%;
             height: 100%;
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: 2;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
         
-        /* Layer thickness visualizer */
-        .layer-visual {
-            position: relative;
-            height: 200px;
-            background: linear-gradient(to right, #2a2a2a 0%, #3a3a3a 100%);
-            border-radius: 10px;
-            overflow: hidden;
+        /* Stats */
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #c9a962, #f0e6d2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
-        .zinc-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(90deg, #c9a962 0%, #e8d5a3 50%, #c9a962 100%);
-            box-shadow: 0 0 20px rgba(201, 169, 98, 0.3);
+        @media (min-width: 768px) {
+            .stat-number { font-size: 3.5rem; }
         }
         
-        /* Testimonial Slider */
+        /* Testimonials */
         .testimonial-track {
             display: flex;
-            gap: 2rem;
-            animation: scroll 40s linear infinite;
+            gap: 1rem;
+            animation: scroll 30s linear infinite;
         }
         
         @keyframes scroll {
@@ -342,177 +232,227 @@
         
         .testimonial-card {
             flex-shrink: 0;
-            width: 400px;
+            width: 300px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(201, 169, 98, 0.1);
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .testimonial-card { width: 400px; padding: 2rem; }
+        }
+        
+        /* Reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Layer visualizer */
+        .layer-bar {
+            height: 3rem;
+            background: linear-gradient(90deg, #c9a962 0%, #e8d5a3 50%, #c9a962 100%);
+            border-radius: 0.5rem;
+            position: relative;
+            box-shadow: 0 0 20px rgba(201, 169, 98, 0.2);
+        }
+        
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .hover-effect { transform: none !important; }
+        }
+        
+        /* Prevent text selection on buttons */
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        /* Loading skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="cursor"></div>
-    
-    <!-- Industrial Noise Texture -->
-    <div class="industrial-texture"></div>
-    
-    <!-- Zinc Particles Canvas -->
-    <canvas id="zincCanvas"></canvas>
-
     <!-- Navigation -->
-    <nav class="nav-glass fixed w-full z-50 transition-all duration-500" id="navbar">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-gradient-to-br from-yellow-600 to-yellow-300 rounded-lg flex items-center justify-center font-bold text-black text-xl">Z</div>
-                <span class="text-2xl font-bold tracking-wider">ZINC<span class="metallic-text">PRO</span></span>
-            </div>
+    <nav class="nav-glass fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 md:px-6 py-3 md:py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 md:gap-3">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-yellow-600 to-yellow-300 rounded-lg flex items-center justify-center font-bold text-black text-lg md:text-xl">Z</div>
+                <span class="text-xl md:text-2xl font-bold tracking-wider">ZINC<span class="metallic-text">PRO</span></span>
+            </a>
             
-            <div class="hidden md:flex items-center gap-8">
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-6 lg:gap-8">
                 <a href="#about" class="text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors">О технологии</a>
                 <a href="#process" class="text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors">Процесс</a>
                 <a href="#services" class="text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors">Услуги</a>
-                <a href="#standards" class="text-sm uppercase tracking-widest hover:text-yellow-500 transition-colors">Стандарты</a>
-                <a href="#contact" class="magnetic-btn text-sm py-3 px-6">Оставить заявку</a>
+                <a href="#contact" class="magnetic-btn text-xs py-3 px-6">Заявка</a>
             </div>
             
-            <button class="md:hidden text-2xl" onclick="toggleMenu()">☰</button>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden p-2 text-2xl" onclick="toggleMenu()" aria-label="Menu">☰</button>
         </div>
         
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-black/95 backdrop-blur-xl absolute w-full border-t border-yellow-500/20">
-            <div class="flex flex-col p-6 gap-4">
-                <a href="#about" class="text-lg py-2 border-b border-white/10">О технологии</a>
-                <a href="#process" class="text-lg py-2 border-b border-white/10">Процесс</a>
-                <a href="#services" class="text-lg py-2 border-b border-white/10">Услуги</a>
-                <a href="#contact" class="magnetic-btn text-center mt-4">Оставить заявку</a>
-            </div>
+        <div id="mobileMenu" class="mobile-menu fixed inset-0 bg-black/98 z-40 md:hidden flex flex-col pt-20 px-6">
+            <button class="absolute top-4 right-4 text-3xl p-2" onclick="toggleMenu()">×</button>
+            <a href="#about" onclick="toggleMenu()" class="text-2xl py-4 border-b border-white/10">О технологии</a>
+            <a href="#process" onclick="toggleMenu()" class="text-2xl py-4 border-b border-white/10">Процесс</a>
+            <a href="#services" onclick="toggleMenu()" class="text-2xl py-4 border-b border-white/10">Услуги</a>
+            <a href="#standards" onclick="toggleMenu()" class="text-2xl py-4 border-b border-white/10">Стандарты</a>
+            <a href="#contact" onclick="toggleMenu()" class="magnetic-btn mt-8 text-center">Оставить заявку</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section relative z-10">
+    <section class="hero-section pt-20 md:pt-0">
         <div class="hero-grid"></div>
         
-        <div class="container mx-auto px-6 relative z-20 pt-20">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
-                    <div class="inline-block px-4 py-2 border border-yellow-500/30 rounded-full text-yellow-500 text-sm tracking-widest uppercase mb-4 reveal">
+        <div class="container mx-auto px-4 md:px-6 relative z-10 w-full">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center min-h-[90vh] md:min-h-screen">
+                <div class="space-y-6 md:space-y-8 text-center md:text-left order-2 md:order-1">
+                    <div class="inline-block px-3 py-1 md:px-4 md:py-2 border border-yellow-500/30 rounded-full text-yellow-500 text-xs md:text-sm tracking-widest uppercase">
                         ISO 9001 • ГОСТ 9.305-84
                     </div>
                     
-                    <h1 class="text-5xl md:text-7xl font-display font-bold leading-tight reveal">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-display font-bold leading-tight">
                         Гальваническое<br>
                         <span class="metallic-text italic">цинкование</span><br>
-                        премиум-класса
+                        <span class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl opacity-90">премиум-класса</span>
                     </h1>
                     
-                    <p class="text-xl text-gray-400 max-w-lg reveal">
-                        Защита металла от коррозии с гарантией до 25 лет. Точное нанесение покрытия от 5 до 40 мкм с идеальной адгезией.
+                    <p class="text-base md:text-lg lg:text-xl text-gray-400 max-w-lg mx-auto md:mx-0 px-2 md:px-0">
+                        Защита металла от коррозии с гарантией до 25 лет. Точное нанесение покрытия от 5 до 40 мкм.
                     </p>
                     
-                    <div class="flex flex-wrap gap-4 reveal">
-                        <button class="magnetic-btn" onclick="scrollToSection('contact')">
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center md:justify-start px-4 md:px-0">
+                        <button class="magnetic-btn text-sm md:text-base" onclick="scrollToSection('contact')">
                             Рассчитать стоимость
                         </button>
-                        <button class="px-8 py-4 border border-white/20 hover:border-yellow-500 transition-colors uppercase tracking-widest text-sm" onclick="scrollToSection('process')">
+                        <button class="px-6 py-3 md:px-8 md:py-4 border border-white/20 hover:border-yellow-500 transition-colors uppercase tracking-widest text-xs md:text-sm rounded-lg" onclick="scrollToSection('process')">
                             Смотреть процесс
                         </button>
                     </div>
                     
-                    <div class="grid grid-cols-3 gap-8 pt-8 border-t border-white/10 reveal">
+                    <div class="grid grid-cols-3 gap-4 md:gap-8 pt-6 md:pt-8 border-t border-white/10 mt-6 md:mt-8">
                         <div>
-                            <div class="text-3xl font-bold metallic-text">15+</div>
-                            <div class="text-sm text-gray-500 mt-1">лет опыта</div>
+                            <div class="text-2xl md:text-3xl lg:text-4xl font-bold metallic-text">15+</div>
+                            <div class="text-xs md:text-sm text-gray-500 mt-1">лет опыта</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold metallic-text">50т</div>
-                            <div class="text-sm text-gray-500 mt-1">в месяц</div>
+                            <div class="text-2xl md:text-3xl lg:text-4xl font-bold metallic-text">50т</div>
+                            <div class="text-xs md:text-sm text-gray-500 mt-1">в месяц</div>
                         </div>
                         <div>
-                            <div class="text-3xl font-bold metallic-text">99.9%</div>
-                            <div class="text-sm text-gray-500 mt-1">качество</div>
+                            <div class="text-2xl md:text-3xl lg:text-4xl font-bold metallic-text">99.9%</div>
+                            <div class="text-xs md:text-sm text-gray-500 mt-1">качество</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative reveal">
-                    <div class="electrolysis-container" id="electrolysis">
-                        <!-- Bubbles generated by JS -->
-                    </div>
-                    <div class="absolute -bottom-6 -right-6 bg-yellow-500/10 backdrop-blur-xl p-6 rounded-2xl border border-yellow-500/20">
-                        <div class="text-yellow-500 font-bold text-lg">Электролитические<br>ванны 1600×800×1180</div>
+                <!-- Hero Image -->
+                <div class="order-1 md:order-2 relative">
+                    <div class="img-container aspect-[4/3] md:aspect-square shadow-2xl border border-yellow-500/20">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.gattoplaters.com/68b1970430f79051c312ec07785aa3a27f26e617.jpg" 
+                             alt="Барабанное цинкование металлических деталей" 
+                             class="w-full h-full object-cover"
+                             loading="eager">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 right-4 bg-black/80 backdrop-blur-md p-3 md:p-4 rounded-xl border border-yellow-500/20">
+                            <div class="text-yellow-500 font-bold text-sm md:text-base">Производственная линия</div>
+                            <div class="text-xs md:text-sm text-gray-300">Автоматизированные ванны 1600×800×1180 мм</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
             <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
             </svg>
         </div>
     </section>
 
-    <!-- About / Technology Section -->
-    <section id="about" class="py-32 relative z-10 liquid-bg">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="order-2 lg:order-1 reveal">
-                    <div class="relative">
-                        <div class="aspect-square bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl overflow-hidden border border-yellow-500/10">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div class="text-center">
-                                    <div class="text-8xl font-display metallic-text mb-4">Zn</div>
-                                    <div class="text-gray-400 tracking-widest uppercase">Атомный номер 30</div>
-                                </div>
-                            </div>
-                            <!-- Animated rings -->
-                            <div class="absolute inset-0 border-2 border-yellow-500/20 rounded-full animate-ping" style="animation-duration: 3s;"></div>
-                            <div class="absolute inset-4 border border-yellow-500/10 rounded-full"></div>
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-32 bg-gradient-to-b from-[#0a0a0a] to-[#1a1a1a]">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <!-- Mobile: Image first -->
+                <div class="order-1 md:order-1 reveal">
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <div class="img-container aspect-square">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.bayoucitybolt.com/4e73d55e07557d584514cd8dcbd9b3e9852a1a87.jpg" 
+                                 alt="Цинкованный крепеж и метизы" 
+                                 loading="lazy">
+                        </div>
+                        <div class="img-container aspect-square mt-6 md:mt-8">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.coremarkmetals.com/c2fa076c3df3d9e7cd9e7e96cd0e3f3b2a310e90.jpg" 
+                                 alt="Болты с цинковым покрытием желтого цвета" 
+                                 loading="lazy">
+                        </div>
+                        <div class="img-container aspect-square col-span-2">
+                            <img src="https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/bf23c446b6a78bfa6004097db5081a170562d5ce.jpg" 
+                                 alt="Процесс электролитического цинкования в ванне" 
+                                 loading="lazy">
                         </div>
                     </div>
                 </div>
                 
-                <div class="order-1 lg:order-2 space-y-6 reveal">
-                    <h2 class="text-4xl md:text-5xl font-display font-bold">
+                <div class="order-2 md:order-2 space-y-4 md:space-y-6 reveal">
+                    <h2 class="text-2xl md:text-4xl lg:text-5xl font-display font-bold leading-tight">
                         Технология<br>
                         <span class="metallic-text">электроосаждения</span>
                     </h2>
                     
-                    <p class="text-gray-400 text-lg leading-relaxed">
-                        Гальваническое цинкование — это электрохимический процесс нанесения защитного слоя цинка на металлические изделия. В отличие от горячего цинкования, этот метод обеспечивает тонкое (5-40 мкм), но исключительно равномерное покрытие с высоким декоративным эффектом.
+                    <p class="text-gray-400 text-base md:text-lg leading-relaxed">
+                        Гальваническое цинкование — это электрохимический процесс нанесения защитного слоя цинка на металлические изделия. Метод обеспечивает тонкое (5-40 мкм), но исключительно равномерное покрытие.
                     </p>
                     
-                    <div class="space-y-4 pt-4">
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
-                                <span class="text-yellow-500 font-bold">01</span>
+                    <div class="space-y-3 md:space-y-4 pt-2 md:pt-4">
+                        <div class="flex items-start gap-3 md:gap-4 p-3 rounded-xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
+                                <span class="text-yellow-500 font-bold text-sm md:text-base">01</span>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-1">Катодная защита</h4>
-                                <p class="text-gray-500 text-sm">Цинк служит жертвенным анодом, защищая сталь даже при повреждении покрытия</p>
+                                <h4 class="font-bold text-base md:text-lg mb-1">Катодная защита</h4>
+                                <p class="text-gray-500 text-sm md:text-base">Цинк служит жертвенным анодом, защищая сталь даже при повреждении покрытия</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
-                                <span class="text-yellow-500 font-bold">02</span>
+                        <div class="flex items-start gap-3 md:gap-4 p-3 rounded-xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
+                                <span class="text-yellow-500 font-bold text-sm md:text-base">02</span>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-1">Интерметаллидные соединения</h4>
-                                <p class="text-gray-500 text-sm">Образование прочной связи на молекулярном уровне обеспечивает адгезию</p>
+                                <h4 class="font-bold text-base md:text-lg mb-1">Интерметаллиды</h4>
+                                <p class="text-gray-500 text-sm md:text-base">Образование прочной связи на молекулярном уровне обеспечивает адгезию</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-start gap-4">
-                            <div class="w-12 h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
-                                <span class="text-yellow-500 font-bold">03</span>
+                        <div class="flex items-start gap-3 md:gap-4 p-3 rounded-xl bg-white/5 border border-white/5">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0 border border-yellow-500/30">
+                                <span class="text-yellow-500 font-bold text-sm md:text-base">03</span>
                             </div>
                             <div>
-                                <h4 class="font-bold text-lg mb-1">Хроматирование</h4>
-                                <p class="text-gray-500 text-sm">Дополнительная пассивация для повышения коррозионной стойкости</p>
+                                <h4 class="font-bold text-base md:text-lg mb-1">Хроматирование</h4>
+                                <p class="text-gray-500 text-sm md:text-base">Дополнительная пассивация для повышения коррозионной стойкости</p>
                             </div>
                         </div>
                     </div>
@@ -522,13 +462,13 @@
     </section>
 
     <!-- Process Section -->
-    <section id="process" class="py-32 relative z-10 bg-black">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-20 reveal">
-                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">
+    <section id="process" class="py-16 md:py-32 bg-black relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12 md:mb-20 reveal">
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-3 md:mb-4">
                     Технологический <span class="metallic-text">процесс</span>
                 </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
+                <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto px-4">
                     9 стадий контролируемой обработки для достижения идеального результата
                 </p>
             </div>
@@ -536,102 +476,80 @@
             <div class="relative max-w-4xl mx-auto">
                 <div class="process-line reveal"></div>
                 
-                <div class="space-y-24">
+                <div class="space-y-8 md:space-y-16">
                     <!-- Step 1 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:text-right md:pr-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 1</div>
-                            <h3 class="text-2xl font-bold mb-2">Обезжиривание</h3>
-                            <p class="text-gray-400">Удаление масел, смазок и загрязнений щелочными растворами при 60-80°C</p>
-                        </div>
-                        <div class="md:pl-12">
-                            <div class="h-32 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-yellow-500/20 flex items-center justify-center">
-                                <svg class="w-12 h-12 text-yellow-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                                </svg>
+                    <div class="process-node relative pl-12 md:pl-0 reveal">
+                        <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
+                            <div class="md:text-right md:pr-12 mb-4 md:mb-0">
+                                <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 1</div>
+                                <h3 class="text-xl md:text-2xl font-bold mb-2">Обезжиривание</h3>
+                                <p class="text-gray-400 text-sm md:text-base">Удаление масел и смазок щелочными растворами при 60-80°C</p>
                             </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 2 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:order-2 md:text-left md:pl-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 2</div>
-                            <h3 class="text-2xl font-bold mb-2">Промывка</h3>
-                            <p class="text-gray-400">Многоуровневая промывка в проточных ваннах для удаления химических остатков</p>
-                        </div>
-                        <div class="md:order-1 md:text-right md:pr-12">
-                            <div class="h-32 bg-gradient-to-l from-gray-800 to-gray-900 rounded-xl border border-yellow-500/20 flex items-center justify-center">
-                                <svg class="w-12 h-12 text-blue-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 3 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:text-right md:pr-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 3</div>
-                            <h3 class="text-2xl font-bold mb-2">Травление</h3>
-                            <p class="text-gray-400">Удаление окалины и ржавчины в растворе соляной кислоты с ингибиторами</p>
-                        </div>
-                        <div class="md:pl-12">
-                            <div class="h-32 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-yellow-500/20 flex items-center justify-center">
-                                <svg class="w-12 h-12 text-red-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 4 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:order-2 md:text-left md:pl-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 4-5</div>
-                            <h3 class="text-2xl font-bold mb-2">Гальваническое цинкование</h3>
-                            <p class="text-gray-400">Осаждение цинка из электролита при плотности тока 1-3 А/дм². Толщина слоя контролируется точно до микрона</p>
-                        </div>
-                        <div class="md:order-1 md:text-right md:pr-12">
-                            <div class="h-32 bg-gradient-to-l from-yellow-900/30 to-gray-900 rounded-xl border border-yellow-500/40 flex items-center justify-center relative overflow-hidden">
-                                <div class="absolute inset-0 bg-yellow-500/10 animate-pulse"></div>
-                                <svg class="w-12 h-12 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Step 5 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:text-right md:pr-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 6</div>
-                            <h3 class="text-2xl font-bold mb-2">Пассивация</h3>
-                            <p class="text-gray-400">Хроматирование для повышения коррозионной стойкости и придания цвета (синий, жёлтый, чёрный радужный)</p>
-                        </div>
-                        <div class="md:pl-12">
-                            <div class="h-32 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-yellow-500/20 flex items-center justify-center">
-                                <div class="flex gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-blue-500/50"></div>
-                                    <div class="w-8 h-8 rounded-full bg-yellow-500/50"></div>
-                                    <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-600"></div>
+                            <div class="md:pl-12">
+                                <div class="img-container h-32 md:h-40 bg-gray-800">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/platingmachines.com/a5e3562e4f29317dacb039f462ecdf0ab3e31b40.jpg" 
+                                         alt="Линия обезжиривания деталей" 
+                                         class="opacity-80 hover:opacity-100 transition-opacity">
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Step 6 -->
-                    <div class="process-node grid md:grid-cols-2 gap-8 items-center reveal">
-                        <div class="md:order-2 md:text-left md:pl-12">
-                            <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 7</div>
-                            <h3 class="text-2xl font-bold mb-2">Сушка</h3>
-                            <p class="text-gray-400">Термическая обработка при 60-80°C для удаления влаги и стабилизации покрытия</p>
+                    <!-- Step 2 -->
+                    <div class="process-node relative pl-12 md:pl-0 reveal">
+                        <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
+                            <div class="md:order-2 md:text-left md:pl-12 mb-4 md:mb-0">
+                                <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 2-3</div>
+                                <h3 class="text-xl md:text-2xl font-bold mb-2">Промывка и травление</h3>
+                                <p class="text-gray-400 text-sm md:text-base">Многоуровневая промывка и удаление окалины</p>
+                            </div>
+                            <div class="md:order-1 md:text-right md:pr-12">
+                                <div class="img-container h-32 md:h-40 bg-gray-800">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/fa99debe43edc4b0e5a3b8e41db64b9f76b8de6f.webp" 
+                                         alt="Автоматическая линия платинга" 
+                                         class="opacity-80 hover:opacity-100 transition-opacity">
+                                </div>
+                            </div>
                         </div>
-                        <div class="md:order-1 md:text-right md:pr-12">
-                            <div class="h-32 bg-gradient-to-l from-orange-900/20 to-gray-900 rounded-xl border border-yellow-500/20 flex items-center justify-center">
-                                <svg class="w-12 h-12 text-orange-400/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                                </svg>
+                    </div>
+                    
+                    <!-- Step 3 - Main Process -->
+                    <div class="process-node relative pl-12 md:pl-0 reveal">
+                        <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
+                            <div class="md:text-right md:pr-12 mb-4 md:mb-0">
+                                <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 4-5</div>
+                                <h3 class="text-xl md:text-2xl font-bold mb-2 text-yellow-500">Гальваническое цинкование</h3>
+                                <p class="text-gray-400 text-sm md:text-base">Осаждение цинка из электролита при плотности тока 1-3 А/дм²</p>
+                            </div>
+                            <div class="md:pl-12">
+                                <div class="img-container h-40 md:h-48 border-2 border-yellow-500/30 shadow-lg shadow-yellow-500/10">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/www.mwcomponents.com/116c0138e627531632ffd2293b494cb00bcdba78.png" 
+                                         alt="Детали на подвесах в ванне цинкования" 
+                                         class="object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                                        <span class="text-yellow-500 font-bold text-sm">Точность до 1 мкм</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="process-node relative pl-12 md:pl-0 reveal">
+                        <div class="md:grid md:grid-cols-2 md:gap-8 items-center">
+                            <div class="md:order-2 md:text-left md:pl-12 mb-4 md:mb-0">
+                                <div class="inline-block px-3 py-1 bg-yellow-500/10 rounded-full text-yellow-500 text-xs uppercase tracking-wider mb-2">Этап 6</div>
+                                <h3 class="text-xl md:text-2xl font-bold mb-2">Пассивация</h3>
+                                <p class="text-gray-400 text-sm md:text-base">Хроматирование для защиты и цвета (синий, жёлтый, чёрный)</p>
+                            </div>
+                            <div class="md:order-1 md:text-right md:pr-12">
+                                <div class="img-container h-32 md:h-40 bg-gray-800 flex items-center justify-center p-4">
+                                    <div class="flex gap-2 md:gap-4 justify-center w-full">
+                                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-blue-500 shadow-lg shadow-blue-500/30"></div>
+                                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-yellow-500 shadow-lg shadow-yellow-500/30"></div>
+                                        <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gray-900 border-2 border-gray-600 shadow-lg"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -641,194 +559,164 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-32 relative z-10 bg-gradient-to-b from-black to-gray-900">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-display font-bold mb-4">
+    <section id="services" class="py-16 md:py-32 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-10 md:mb-16 reveal">
+                <h2 class="text-2xl md:text-4xl lg:text-5xl font-display font-bold mb-3 md:mb-4">
                     Виды <span class="metallic-text">цинкования</span>
                 </h2>
-                <p class="text-gray-400">Подбор оптимальной технологии под ваши задачи</p>
+                <p class="text-gray-400 text-sm md:text-base px-4">Подбор оптимальной технологии под ваши задачи</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-4 md:gap-8">
                 <!-- Service 1 -->
-                <div class="service-card rounded-2xl p-8 reveal">
-                    <div class="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 border border-yellow-500/20">
-                        <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
-                        </svg>
+                <div class="service-card rounded-2xl overflow-hidden reveal">
+                    <div class="img-container h-48 md:h-56">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.gattoplaters.com/68b1970430f79051c312ec07785aa3a27f26e617.jpg" 
+                             alt="Барабанное цинкование метизов" 
+                             loading="lazy">
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Барабанное</h3>
-                    <p class="text-gray-400 mb-6">Для мелких деталей: крепёж, метизы, шайбы. Высокая производительность до 5 тонн/сутки.</p>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Толщина слоя</span>
-                            <span class="text-yellow-500">5-15 мкм</span>
-                        </div>
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Цена</span>
-                            <span class="text-white">от 25 ₽/кг</span>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3">Барабанное</h3>
+                        <p class="text-gray-400 text-sm md:text-base mb-4">Для мелких деталей: крепёж, метизы, шайбы. Высокая производительность.</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Толщина</span>
+                                <span class="text-yellow-500">5-15 мкм</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Цена</span>
+                                <span class="text-white font-bold">от 25 ₽/кг</span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
-                <div class="service-card rounded-2xl p-8 reveal">
-                    <div class="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 border border-yellow-500/20">
-                        <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
+                <div class="service-card rounded-2xl overflow-hidden reveal">
+                    <div class="img-container h-48 md:h-56">
+                        <img src="https://kimi-web-img.moonshot.cn/img/www.mwcomponents.com/116c0138e627531632ffd2293b494cb00bcdba78.png" 
+                             alt="Цинкование на подвесах" 
+                             loading="lazy">
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">На подвесах</h3>
-                    <p class="text-gray-400 mb-6">Для крупных деталей и конструкций. Сохраняет геометрию и предотвращает деформацию.</p>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Толщина слоя</span>
-                            <span class="text-yellow-500">10-40 мкм</span>
-                        </div>
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Цена</span>
-                            <span class="text-white">от 35 ₽/кг</span>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3">На подвесах</h3>
+                        <p class="text-gray-400 text-sm md:text-base mb-4">Для крупных деталей. Сохраняет геометрию и предотвращает деформацию.</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Толщина</span>
+                                <span class="text-yellow-500">10-40 мкм</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Цена</span>
+                                <span class="text-white font-bold">от 35 ₽/кг</span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Service 3 -->
-                <div class="service-card rounded-2xl p-8 reveal">
-                    <div class="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mb-6 border border-yellow-500/20">
-                        <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-                        </svg>
+                <div class="service-card rounded-2xl overflow-hidden reveal">
+                    <div class="img-container h-48 md:h-56 bg-gray-800 flex items-center justify-center">
+                        <img src="https://kimi-web-img.moonshot.cn/img/difco.us.com/ce905cb0972ee7b8466d2c83340a1f663d2bdb07.jpg" 
+                             alt="GEOMET покрытие болтов" 
+                             loading="lazy">
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Селективное</h3>
-                    <p class="text-gray-400 mb-6">Точечное нанесение покрытия на заданные участки. Для электроники и прецизионных деталей.</p>
-                    <div class="space-y-2 text-sm">
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Толщина слоя</span>
-                            <span class="text-yellow-500">2-8 мкм</span>
-                        </div>
-                        <div class="flex justify-between border-b border-white/10 pb-2">
-                            <span class="text-gray-500">Цена</span>
-                            <span class="text-white">от 50 ₽/кг</span>
+                    <div class="p-4 md:p-6">
+                        <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3">Селективное</h3>
+                        <p class="text-gray-400 text-sm md:text-base mb-4">Точечное нанесение на заданные участки. Для электроники.</p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Толщина</span>
+                                <span class="text-yellow-500">2-8 мкм</span>
+                            </div>
+                            <div class="flex justify-between border-b border-white/10 pb-2">
+                                <span class="text-gray-500">Цена</span>
+                                <span class="text-white font-bold">от 50 ₽/кг</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Layer Thickness Visualizer -->
-            <div class="mt-24 reveal">
-                <h3 class="text-2xl font-bold text-center mb-8">Сравнение толщины покрытий</h3>
-                <div class="max-w-3xl mx-auto space-y-6">
-                    <div class="layer-visual">
-                        <div class="zinc-layer" style="width: 20%;"></div>
-                        <div class="absolute inset-0 flex items-center justify-between px-6">
-                            <span class="text-sm font-medium">Гальваническое (5-40 мкм)</span>
+            <!-- Comparison Table Mobile -->
+            <div class="mt-12 md:mt-16 reveal">
+                <h3 class="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">Сравнение толщины покрытий</h3>
+                <div class="space-y-4 max-w-3xl mx-auto px-2">
+                    <div class="bg-gray-800/50 rounded-xl p-4 border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Гальваническое</span>
                             <span class="text-yellow-500 font-bold">20 мкм</span>
                         </div>
+                        <div class="layer-bar" style="width: 30%;"></div>
+                        <div class="text-xs text-gray-500 mt-1">Точная геометрия, декоративность</div>
                     </div>
-                    <div class="layer-visual">
-                        <div class="zinc-layer" style="width: 60%; opacity: 0.7;"></div>
-                        <div class="absolute inset-0 flex items-center justify-between px-6">
-                            <span class="text-sm font-medium">Термодиффузионное (10-50 мкм)</span>
+                    
+                    <div class="bg-gray-800/50 rounded-xl p-4 border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Термодиффузионное</span>
                             <span class="text-yellow-500 font-bold">30 мкм</span>
                         </div>
+                        <div class="layer-bar opacity-70" style="width: 50%;"></div>
+                        <div class="text-xs text-gray-500 mt-1">Высокая износостойкость</div>
                     </div>
-                    <div class="layer-visual">
-                        <div class="zinc-layer" style="width: 100%; opacity: 0.5;"></div>
-                        <div class="absolute inset-0 flex items-center justify-between px-6">
-                            <span class="text-sm font-medium">Горячее (40-200 мкм)</span>
+                    
+                    <div class="bg-gray-800/50 rounded-xl p-4 border border-white/5">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium">Горячее цинкование</span>
                             <span class="text-yellow-500 font-bold">100+ мкм</span>
                         </div>
+                        <div class="layer-bar opacity-50" style="width: 100%;"></div>
+                        <div class="text-xs text-gray-500 mt-1">Максимальная защита, грубая фактура</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Standards & Quality -->
-    <section id="standards" class="py-32 relative z-10 liquid-bg">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div class="space-y-8 reveal">
-                    <h2 class="text-4xl md:text-5xl font-display font-bold">
+    <!-- Standards Section -->
+    <section id="standards" class="py-16 md:py-32 bg-[#1a1a1a]">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
+                <div class="space-y-4 md:space-y-6 reveal">
+                    <h2 class="text-2xl md:text-4xl lg:text-5xl font-display font-bold leading-tight">
                         Стандарты<br>
                         <span class="metallic-text">качества</span>
                     </h2>
                     
-                    <p class="text-gray-400 text-lg">
-                        Наше производство сертифицировано по международным и российским стандартам. Каждая партия проходит лабораторный контроль.
+                    <p class="text-gray-400 text-base md:text-lg">
+                        Производство сертифицировано по международным стандартам. Каждая партия проходит лабораторный контроль.
                     </p>
                     
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
-                            <div class="text-yellow-500 font-bold mb-1">ГОСТ 9.305-84</div>
-                            <div class="text-sm text-gray-500">Цинковые покрытия</div>
+                    <div class="grid grid-cols-2 gap-3 md:gap-4">
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 text-center md:text-left">
+                            <div class="text-yellow-500 font-bold text-sm md:text-base mb-1">ГОСТ 9.305-84</div>
+                            <div class="text-xs text-gray-500">Цинковые покрытия</div>
                         </div>
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
-                            <div class="text-yellow-500 font-bold mb-1">ISO 1461</div>
-                            <div class="text-sm text-gray-500">Горячее цинкование</div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 text-center md:text-left">
+                            <div class="text-yellow-500 font-bold text-sm md:text-base mb-1">ISO 1461</div>
+                            <div class="text-xs text-gray-500">Горячее цинкование</div>
                         </div>
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
-                            <div class="text-yellow-500 font-bold mb-1">ASTM B633</div>
-                            <div class="text-sm text-gray-500">Электроосаждение</div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 text-center md:text-left">
+                            <div class="text-yellow-500 font-bold text-sm md:text-base mb-1">ASTM B633</div>
+                            <div class="text-xs text-gray-500">Электроосаждение</div>
                         </div>
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-4">
-                            <div class="text-yellow-500 font-bold mb-1">ISO 9001</div>
-                            <div class="text-sm text-gray-500">Система менеджмента</div>
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-3 md:p-4 text-center md:text-left">
+                            <div class="text-yellow-500 font-bold text-sm md:text-base mb-1">ISO 9001</div>
+                            <div class="text-xs text-gray-500">Система менеджмента</div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="reveal">
-                    <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 border border-yellow-500/20">
-                        <h3 class="text-2xl font-bold mb-6">Контроль качества</h3>
-                        
-                        <div class="space-y-6">
-                            <div class="flex items-center justify-between p-4 bg-black/30 rounded-xl">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Толщиномер</div>
-                                        <div class="text-sm text-gray-500">Микрометрический контроль</div>
-                                    </div>
-                                </div>
-                                <div class="text-green-500 font-mono">±1 мкм</div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-4 bg-black/30 rounded-xl">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Адгезия</div>
-                                        <div class="text-sm text-gray-500">Ударный метод</div>
-                                    </div>
-                                </div>
-                                <div class="text-green-500 font-mono">100%</div>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-4 bg-black/30 rounded-xl">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div class="font-bold">Соляной туман</div>
-                                        <div class="text-sm text-gray-500">Ускоренные испытания</div>
-                                    </div>
-                                </div>
-                                <div class="text-green-500 font-mono">>240ч</div>
-                            </div>
-                        </div>
+                    <div class="img-container aspect-[4/3] md:aspect-square rounded-3xl border border-yellow-500/20">
+                        <img src="https://kimi-web-img.moonshot.cn/img/neicorporation.com/e7ecda79002f7386f25b7f3ee8e00fe48643f10e.png" 
+                             alt="Тест на коррозионную стойкость цинкового покрытия" 
+                             class="w-full h-full object-contain bg-black p-4 md:p-8">
+                    </div>
+                    <div class="mt-4 text-center">
+                        <div class="text-sm text-gray-400">Испытания в соляном тумане</div>
+                        <div class="text-yellow-500 font-bold">> 240 часов без коррозии</div>
                     </div>
                 </div>
             </div>
@@ -836,207 +724,182 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-24 bg-black relative z-10 border-y border-white/5">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+    <section class="py-12 md:py-24 bg-black border-y border-white/5">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
                 <div class="reveal">
                     <div class="stat-number" data-target="15">0</div>
-                    <div class="text-gray-500 mt-2 uppercase tracking-widest text-sm">Лет на рынке</div>
+                    <div class="text-xs md:text-sm text-gray-500 mt-1 uppercase tracking-wider">Лет на рынке</div>
                 </div>
                 <div class="reveal">
                     <div class="stat-number" data-target="500">0</div>
-                    <div class="text-gray-500 mt-2 uppercase tracking-widest text-sm">Тонн в месяц</div>
+                    <div class="text-xs md:text-sm text-gray-500 mt-1 uppercase tracking-wider">Тонн/мес</div>
                 </div>
                 <div class="reveal">
                     <div class="stat-number" data-target="1200">0</div>
-                    <div class="text-gray-500 mt-2 uppercase tracking-widest text-sm">Клиентов</div>
+                    <div class="text-xs md:text-sm text-gray-500 mt-1 uppercase tracking-wider">Клиентов</div>
                 </div>
                 <div class="reveal">
                     <div class="stat-number" data-target="25">0</div>
-                    <div class="text-gray-500 mt-2 uppercase tracking-widest text-sm">Лет гарантии</div>
+                    <div class="text-xs md:text-sm text-gray-500 mt-1 uppercase tracking-wider">Лет гарантии</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials -->
-    <section class="py-24 bg-gradient-to-b from-black to-gray-900 overflow-hidden relative z-10">
-        <div class="container mx-auto px-6 mb-12">
-            <h2 class="text-3xl font-display font-bold text-center reveal">Нам доверяют</h2>
+    <section class="py-12 md:py-24 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6 mb-8 md:mb-12">
+            <h2 class="text-xl md:text-3xl font-display font-bold text-center reveal">Нам доверяют</h2>
         </div>
         
         <div class="relative reveal">
             <div class="testimonial-track">
                 <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">АВ</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold text-sm">АВ</div>
                         <div>
-                            <div class="font-bold">АО "Воздух"</div>
-                            <div class="text-sm text-gray-500">Авиационная промышленность</div>
+                            <div class="font-bold text-sm">АО "Воздух"</div>
+                            <div class="text-xs text-gray-500">Авиация</div>
                         </div>
                     </div>
-                    <p class="text-gray-400">"Превосходное качество селективного цинкования для авиадеталей. Точность нанесения покрытия на уровне микрон."</p>
+                    <p class="text-gray-400 text-sm">"Превосходное качество селективного цинкования для авиадеталей. Точность на уровне микрон."</p>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">МС</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold text-sm">МС</div>
                         <div>
-                            <div class="font-bold">МеталлСервис</div>
-                            <div class="text-sm text-gray-500">Строительные конструкции</div>
+                            <div class="font-bold text-sm">МеталлСервис</div>
+                            <div class="text-xs text-gray-500">Строительство</div>
                         </div>
                     </div>
-                    <p class="text-gray-400">"Сотрудничаем 5 лет. Барабанное цинкование крепежа с пассивацией желтого цвета - идеальное соотношение цены и качества."</p>
+                    <p class="text-gray-400 text-sm">"Сотрудничаем 5 лет. Барабанное цинкование крепежа с пассивацией желтого цвета."</p>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">ТП</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold text-sm">ТП</div>
                         <div>
-                            <div class="font-bold">ТрубоПром</div>
-                            <div class="text-sm text-gray-500">Нефтегазовое оборудование</div>
+                            <div class="font-bold text-sm">ТрубоПром</div>
+                            <div class="text-xs text-gray-500">Нефтегаз</div>
                         </div>
                     </div>
-                    <p class="text-gray-400">"Внутреннее цинкование труб большого диаметра. Покрытие выдерживает агрессивные среды нефтедобычи."</p>
+                    <p class="text-gray-400 text-sm">"Внутреннее цинкование труб большого диаметра. Покрытие выдерживает агрессивные среды."</p>
                 </div>
                 
                 <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">РЖ</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold text-sm">РЖ</div>
                         <div>
-                            <div class="font-bold">РЖД Инжиниринг</div>
-                            <div class="text-sm text-gray-500">Железнодорожная отрасль</div>
+                            <div class="font-bold text-sm">РЖД Инжиниринг</div>
+                            <div class="text-xs text-gray-500">Железнодорожная отрасль</div>
                         </div>
                     </div>
-                    <p class="text-gray-400">"Цинкование крепежных элементов путей по ГОСТ. Срок службы покрытия превышает 20 лет в условиях РФ."</p>
+                    <p class="text-gray-400 text-sm">"Цинкование крепежных элементов путей по ГОСТ. Срок службы более 20 лет."</p>
                 </div>
                 
                 <!-- Duplicate for infinite scroll -->
                 <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">АВ</div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold text-sm">АВ</div>
                         <div>
-                            <div class="font-bold">АО "Воздух"</div>
-                            <div class="text-sm text-gray-500">Авиационная промышленность</div>
+                            <div class="font-bold text-sm">АО "Воздух"</div>
+                            <div class="text-xs text-gray-500">Авиация</div>
                         </div>
                     </div>
-                    <p class="text-gray-400">"Превосходное качество селективного цинкования для авиадеталей. Точность нанесения покрытия на уровне микрон."</p>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-yellow-500/20 rounded-full flex items-center justify-center text-yellow-500 font-bold">МС</div>
-                        <div>
-                            <div class="font-bold">МеталлСервис</div>
-                            <div class="text-sm text-gray-500">Строительные конструкции</div>
-                        </div>
-                    </div>
-                    <p class="text-gray-400">"Сотрудничаем 5 лет. Барабанное цинкование крепежа с пассивацией желтого цвета - идеальное соотношение цены и качества."</p>
+                    <p class="text-gray-400 text-sm">"Превосходное качество селективного цинкования для авиадеталей."</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-32 relative z-10 bg-black">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16">
-                <div class="space-y-8 reveal">
-                    <h2 class="text-4xl md:text-5xl font-display font-bold">
+    <section id="contact" class="py-16 md:py-32 bg-black">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid md:grid-cols-2 gap-8 md:gap-16">
+                <div class="space-y-6 reveal">
+                    <h2 class="text-2xl md:text-4xl lg:text-5xl font-display font-bold leading-tight">
                         Рассчитать<br>
                         <span class="metallic-text">стоимость</span>
                     </h2>
                     
-                    <p class="text-gray-400 text-lg">
-                        Отправьте заявку с чертежами или фотографиями деталей. Мы подготовим коммерческое предложение в течение 2 часов.
+                    <p class="text-gray-400 text-base md:text-lg">
+                        Отправьте заявку с чертежами или фотографиями. Коммерческое предложение за 2 часа.
                     </p>
                     
                     <div class="space-y-4">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-yellow-500/10 rounded-full flex items-center justify-center">
+                        <a href="tel:+74951234567" class="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10 hover:border-yellow-500/30 transition-colors">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <div class="text-sm text-gray-500">Телефон</div>
-                                <div class="text-xl font-bold">+7 (495) 123-45-67</div>
+                                <div class="text-xs text-gray-500">Телефон</div>
+                                <div class="text-lg md:text-xl font-bold">+7 (495) 123-45-67</div>
                             </div>
-                        </div>
+                        </a>
                         
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-yellow-500/10 rounded-full flex items-center justify-center">
-                                <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="text-sm text-gray-500">Email</div>
-                                <div class="text-xl font-bold">info@zincpro.ru</div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-yellow-500/10 rounded-full flex items-center justify-center">
+                        <div class="flex items-center gap-4 p-3 rounded-xl bg-white/5 border border-white/10">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
                                 <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
                             </div>
                             <div>
-                                <div class="text-sm text-gray-500">Адрес производства</div>
-                                <div class="text-xl font-bold">МО, г. Дзержинский, ул. Промышленная 12</div>
+                                <div class="text-xs text-gray-500">Адрес</div>
+                                <div class="text-sm md:text-base font-medium">МО, г. Дзержинский, ул. Промышленная 12</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 border border-yellow-500/20 reveal">
-                    <form class="space-y-6" onsubmit="handleSubmit(event)">
-                        <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-gray-900 to-black rounded-2xl md:rounded-3xl p-4 md:p-8 border border-yellow-500/20 reveal">
+                    <form class="space-y-4 md:space-y-6" onsubmit="handleSubmit(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-sm text-gray-400 mb-2">Имя</label>
-                                <input type="text" class="input-field w-full px-4 py-3 rounded-xl" placeholder="Иван Иванов" required>
+                                <label class="block text-xs text-gray-400 mb-1.5">Имя</label>
+                                <input type="text" class="input-field" placeholder="Иван Иванов" required>
                             </div>
                             <div>
-                                <label class="block text-sm text-gray-400 mb-2">Телефон</label>
-                                <input type="tel" class="input-field w-full px-4 py-3 rounded-xl" placeholder="+7 (___) ___-__-__" required>
+                                <label class="block text-xs text-gray-400 mb-1.5">Телефон</label>
+                                <input type="tel" class="input-field" placeholder="+7 (999) 000-00-00" required>
                             </div>
                         </div>
                         
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">Email</label>
-                            <input type="email" class="input-field w-full px-4 py-3 rounded-xl" placeholder="email@company.ru" required>
+                            <label class="block text-xs text-gray-400 mb-1.5">Email</label>
+                            <input type="email" class="input-field" placeholder="email@company.ru" required>
                         </div>
                         
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">Тип обработки</label>
-                            <select class="input-field w-full px-4 py-3 rounded-xl">
+                            <label class="block text-xs text-gray-400 mb-1.5">Тип обработки</label>
+                            <select class="input-field bg-[#1a1a1a]">
                                 <option>Барабанное цинкование</option>
                                 <option>Цинкование на подвесах</option>
                                 <option>Селективное цинкование</option>
                                 <option>Хроматирование</option>
-                                <option>Фосфатирование</option>
                             </select>
                         </div>
                         
                         <div>
-                            <label class="block text-sm text-gray-400 mb-2">Описание деталей</label>
-                            <textarea class="input-field w-full px-4 py-3 rounded-xl h-32 resize-none" placeholder="Материал, количество, требования к покрытию..."></textarea>
+                            <label class="block text-xs text-gray-400 mb-1.5">Описание</label>
+                            <textarea class="input-field h-24 md:h-32 resize-none" placeholder="Материал, количество, требования..."></textarea>
                         </div>
                         
-                        <div class="border-2 border-dashed border-white/20 rounded-xl p-6 text-center hover:border-yellow-500/50 transition-colors cursor-pointer">
-                            <svg class="w-8 h-8 text-gray-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="border-2 border-dashed border-white/20 rounded-xl p-4 md:p-6 text-center hover:border-yellow-500/50 transition-colors cursor-pointer active:scale-95">
+                            <svg class="w-6 h-6 md:w-8 md:h-8 text-gray-500 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                             </svg>
-                            <div class="text-sm text-gray-400">Прикрепить файлы (чертежи, фото)</div>
+                            <div class="text-xs md:text-sm text-gray-400">Прикрепить файлы</div>
                         </div>
                         
-                        <button type="submit" class="magnetic-btn w-full justify-center">
+                        <button type="submit" class="magnetic-btn rounded-lg">
                             Отправить заявку
                         </button>
                         
-                        <div class="text-xs text-gray-500 text-center">
+                        <div class="text-xs text-gray-600 text-center">
                             Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
                         </div>
                     </form>
@@ -1046,88 +909,53 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white/10 py-12 relative z-10">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div class="col-span-2">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-8 h-8 bg-gradient-to-br from-yellow-600 to-yellow-300 rounded flex items-center justify-center font-bold text-black">Z</div>
-                        <span class="text-xl font-bold">ZINC<span class="metallic-text">PRO</span></span>
+    <footer class="bg-black border-t border-white/10 py-8 md:py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-6 md:mb-8">
+                <div class="col-span-2 md:col-span-2">
+                    <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                        <div class="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-yellow-600 to-yellow-300 rounded flex items-center justify-center font-bold text-black text-sm md:text-base">Z</div>
+                        <span class="text-lg md:text-xl font-bold">ZINC<span class="metallic-text">PRO</span></span>
                     </div>
-                    <p class="text-gray-500 max-w-sm">
-                        Профессиональное гальваническое цинкование металлоизделий любой сложности. Работаем с 2009 года.
+                    <p class="text-gray-500 text-xs md:text-sm max-w-xs">
+                        Профессиональное гальваническое цинкование. Работаем с 2009 года.
                     </p>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-yellow-500">Услуги</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">Барабанное цинкование</a></li>
+                    <h4 class="font-bold mb-2 md:mb-4 text-yellow-500 text-sm">Услуги</h4>
+                    <ul class="space-y-1.5 md:space-y-2 text-xs md:text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Барабанное</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">На подвесах</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Селективное</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Пассивация</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold mb-4 text-yellow-500">Информация</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                    <h4 class="font-bold mb-2 md:mb-4 text-yellow-500 text-sm">Инфо</h4>
+                    <ul class="space-y-1.5 md:space-y-2 text-xs md:text-sm text-gray-400">
                         <li><a href="#" class="hover:text-white transition-colors">О компании</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Сертификаты</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Доставка</a></li>
                         <li><a href="#" class="hover:text-white transition-colors">Контакты</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-sm text-gray-600">© 2024 ZINC PRO. Все права защищены.</div>
-                <div class="flex gap-6 text-sm text-gray-600">
+            <div class="border-t border-white/10 pt-6 md:pt-8 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
+                <div class="text-xs text-gray-600">© 2024 ZINC PRO. Все права защищены.</div>
+                <div class="flex gap-4 text-xs text-gray-600">
                     <a href="#" class="hover:text-yellow-500 transition-colors">Политика конфиденциальности</a>
-                    <a href="#" class="hover:text-yellow-500 transition-colors">Карта сайта</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Register GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-        
-        if (!isTouchDevice) {
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX - 10 + 'px';
-                cursor.style.top = e.clientY - 10 + 'px';
-            });
-            
-            document.querySelectorAll('a, button, .service-card').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-            });
-        } else {
-            cursor.style.display = 'none';
-        }
-        
-        // Navigation scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2');
-                nav.classList.remove('py-4');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-            }
-        });
-        
         // Mobile menu toggle
         function toggleMenu() {
             const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
         }
         
         // Smooth scroll
@@ -1135,150 +963,95 @@
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
         
-        // Reveal animations
-        gsap.utils.toArray('.reveal').forEach(element => {
-            gsap.to(element, {
-                scrollTrigger: {
-                    trigger: element,
-                    start: 'top 85%',
-                    toggleActions: 'play none none reverse'
-                },
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: 'power3.out'
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
-        });
+        }, observerOptions);
+        
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         
         // Stats counter animation
-        gsap.utils.toArray('.stat-number').forEach(stat => {
-            const target = parseInt(stat.getAttribute('data-target'));
-            gsap.to(stat, {
-                scrollTrigger: {
-                    trigger: stat,
-                    start: 'top 85%'
-                },
-                innerHTML: target,
-                duration: 2,
-                snap: { innerHTML: 1 },
-                ease: 'power2.out',
-                onUpdate: function() {
-                    stat.innerHTML = Math.ceil(this.targets()[0].innerHTML);
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const stat = entry.target;
+                    const target = parseInt(stat.getAttribute('data-target'));
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            stat.textContent = target + (target === 25 ? '' : target === 15 ? '+' : '');
+                            clearInterval(timer);
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }, 16);
+                    
+                    statsObserver.unobserve(stat);
                 }
             });
-        });
+        }, { threshold: 0.5 });
         
-        // Zinc Particles Canvas
-        const canvas = document.getElementById('zincCanvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-        
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
-            }
-            
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.reset();
-                }
-            }
-            
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(201, 169, 98, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-        
-        for (let i = 0; i < 50; i++) {
-            particles.push(new Particle());
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-        
-        // Electrolysis bubbles
-        const electrolysis = document.getElementById('electrolysis');
-        function createBubble() {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            const size = Math.random() * 20 + 10;
-            bubble.style.width = size + 'px';
-            bubble.style.height = size + 'px';
-            bubble.style.left = Math.random()  + '%';
-            bubble.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            bubble.style.animationDelay = Math.random() * 2 + 's';
-            electrolysis.appendChild(bubble);
-            
-            setTimeout(() => bubble.remove(), 6000);
-        }
-        setInterval(createBubble, 800);
+        document.querySelectorAll('.stat-number').forEach(stat => statsObserver.observe(stat));
         
         // Form submission
         function handleSubmit(e) {
             e.preventDefault();
             
-            // Create success notification
+            // Show notification
             const notification = document.createElement('div');
-            notification.className = 'fixed top-24 right-6 bg-green-500/90 text-white px-6 py-4 rounded-xl shadow-2xl z-50 transform translate-x-full transition-transform duration-500';
+            notification.className = 'fixed top-20 left-4 right-4 md:left-auto md:right-6 md:w-96 bg-green-500 text-white px-4 py-3 rounded-xl shadow-2xl z-50 transform translate-y-[-100%] transition-transform duration-300 flex items-center gap-3';
             notification.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                    <div>
-                        <div class="font-bold">Заявка отправлена!</div>
-                        <div class="text-sm opacity-90">Мы свяжемся с вами в течение 2 часов</div>
-                    </div>
+                <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <div>
+                    <div class="font-bold text-sm">Заявка отправлена!</div>
+                    <div class="text-xs opacity-90">Мы свяжемся с вами в течение 2 часов</div>
                 </div>
             `;
             document.body.appendChild(notification);
             
-            setTimeout(() => notification.classList.remove('translate-x-full'), 100);
+            setTimeout(() => notification.style.transform = 'translateY(0)', 100);
             setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => notification.remove(), 500);
-            }, 5000);
+                notification.style.transform = 'translateY(-100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
             
             e.target.reset();
         }
         
-        // Parallax effect for hero
+        // Navbar scroll effect
+        let lastScroll = 0;
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroGrid = document.querySelector('.hero-grid');
-            if (heroGrid) {
-                heroGrid.style.transform = `perspective(500px) rotateX(60deg) translateY(${scrolled * 0.5}px)`;
+            const nav = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
             }
+            
+            lastScroll = currentScroll;
         });
+        
+        // Touch device detection for hover effects
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+        }
     </script>
 </body>
 </html>
