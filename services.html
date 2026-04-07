@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Услуги — Профит ТГ</title>
+  <meta name="description" content="Услуги ПРОФИТ ТГ: белое и радужное цинкование, обработка крепежа, метизов, профильных конструкций. Полный технологический цикл." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.png" alt="Профит ТГ" />
+        <span class="brand-text">
+          <span class="name">ПРОФИТ ТГ</span>
+          <span class="tag">Цинкование и защита металлов</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="production.html">Производство</a></li>
+        <li><a href="services.html" class="active">Услуги</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+      </ul>
+      <a href="contacts.html#form" class="nav-cta">Оставить заявку</a>
+      <button class="mobile-menu-btn" onclick="toggleMenu()" id="menuBtn"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" onclick="toggleMenu()">Главная</a>
+    <a href="production.html" onclick="toggleMenu()">Производство</a>
+    <a href="services.html" class="active" onclick="toggleMenu()">Услуги</a>
+    <a href="contacts.html" onclick="toggleMenu()">Контакты</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumbs"><a href="index.html">Главная</a><span class="sep">/</span><span>Услуги</span></div>
+      <h1>Наши <span style="background:linear-gradient(135deg,var(--accent),#fff,var(--accent-secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">услуги</span></h1>
+      <p>Полный цикл защитных цинковых покрытий: от подготовки поверхности до финального контроля качества. Работаем с крепежом, метизами, профилем и нестандартными изделиями.</p>
+    </div>
+  </section>
+
+  <!-- Services grid -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Технологический цикл</div>
+      <h2>Что мы делаем</h2>
+      <p class="section-subtitle">Шесть направлений, объединённых единой производственной цепочкой</p>
+    </div>
+
+    <div class="cards-grid cols-3">
+      <div class="card"><div class="card-body">
+        <div class="card-icon">🔧</div>
+        <h3>Подготовка деталей</h3>
+        <p>Щелочное обезжиривание, травление и активация поверхности для идеальной адгезии покрытия. Удаление окалины, ржавчины и старых покрытий.</p>
+      </div></div>
+
+      <div class="card"><div class="card-body">
+        <div class="card-icon">⚡</div>
+        <h3>Гальваническое цинкование</h3>
+        <p>Автоматизированная линия с точным контролем температуры, плотности тока и времени обработки. Равномерный слой по всей геометрии изделия.</p>
+      </div></div>
+
+      <div class="card"><div class="card-body">
+        <div class="card-icon">🛡️</div>
+        <h3>Пассивация</h3>
+        <p>Финальная обработка для повышения коррозионной стойкости и задания цвета покрытия — белого или радужного с перламутровым эффектом.</p>
+      </div></div>
+
+      <div class="card"><div class="card-body">
+        <div class="card-icon">🔬</div>
+        <h3>Лабораторный контроль</h3>
+        <p>Анализ химического состава растворов, измерение толщины покрытия толщиномером, проверка адгезии и коррозионной стойкости.</p>
+      </div></div>
+
+      <div class="card"><div class="card-body">
+        <div class="card-icon">✓</div>
+        <h3>Отдел ОТК</h3>
+        <p>Визуальный контроль каждой партии: отсутствие дефектов, потёков, непокрытых участков. 100% проверка перед отгрузкой.</p>
+      </div></div>
+
+      <div class="card"><div class="card-body">
+        <div class="card-icon">📦</div>
+        <h3>Упаковка и логистика</h3>
+        <p>Маркировка, защитная упаковка и отгрузка готовой продукции с полным пакетом сопроводительных документов.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- Coatings -->
+  <section class="section" style="background: var(--bg-secondary); max-width:none; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div style="max-width: var(--maxw); margin: 0 auto;">
+      <div class="section-header">
+        <div class="section-label">Виды покрытий</div>
+        <h2>Выберите тип <span class="accent">цинкования</span></h2>
+        <p class="section-subtitle">Два типа покрытий для различных условий эксплуатации</p>
+      </div>
+
+      <div class="cards-grid cols-2">
+        <div class="coating-card" id="white">
+          <div class="img"><img src="assets/img/gal-fasteners.jpg" alt="Белое цинкование" /></div>
+          <div class="coating-body">
+            <span class="coating-tag">Классическое</span>
+            <h3>Белое цинкование</h3>
+            <p>Классическое защитное покрытие с высокой коррозионной стойкостью. Обеспечивает равномерную защиту изделий в умеренно-агрессивных средах. Оптимальное соотношение цены и качества.</p>
+            <ul class="feat-list">
+              <li>Серебристо-белый цвет</li>
+              <li>Высокая стойкость к коррозии</li>
+              <li>Равномерное покрытие</li>
+              <li>Экономичное решение</li>
+              <li>Соответствие ГОСТ 9.301-86</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="coating-card" id="rainbow">
+          <div class="img"><img src="assets/img/gal-profiles-brass.jpg" alt="Радужное цинкование" /></div>
+          <div class="coating-body">
+            <span class="coating-tag warm">Премиум</span>
+            <h3>Радужное цинкование</h3>
+            <p>Декоративное покрытие с эффектом перламутра. Сочетает эстетичный внешний вид с повышенной коррозионной защитой. Применяется для изделий, где важен и внешний вид, и долговечность.</p>
+            <ul class="feat-list">
+              <li>Перламутровый эффект</li>
+              <li>Разнообразие оттенков</li>
+              <li>Повышенная защита от коррозии</li>
+              <li>Декоративный вид</li>
+              <li>Стабильная пассивирующая плёнка</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Examples / Готовая продукция -->
+  <section class="section" id="examples">
+    <div class="section-header">
+      <div class="section-label">Примеры работ</div>
+      <h2>Готовая продукция</h2>
+      <p class="section-subtitle">Работаем с метизами, крепежом, профильными конструкциями и нестандартными изделиями</p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="assets/img/gal-fasteners.jpg" alt="Крепёж и метизы" /><div class="ov"><h4>Крепёж и метизы</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-profiles-1.jpg" alt="Перфорированные профили" /><div class="ov"><h4>Перфорированные профили</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-profiles-2.jpg" alt="Длинные профили" /><div class="ov"><h4>Длинные профили</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-profiles-brass.jpg" alt="Профили и латунные кольца" /><div class="ov"><h4>Профили и латунь</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-rods.jpg" alt="Стержни и прутки" /><div class="ov"><h4>Стержни и прутки</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-brackets.jpg" alt="Перфорированные кронштейны" /><div class="ov"><h4>Перфорированные кронштейны</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-tubes.jpg" alt="Длинные трубы" /><div class="ov"><h4>Трубы и стойки</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-corners.jpg" alt="Уголки в ящике" /><div class="ov"><h4>Уголки и метизы</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-pallets.jpg" alt="Паллеты с готовой продукцией" /><div class="ov"><h4>Готовые партии</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/gal-stack.jpg" alt="Стопка профилей" /><div class="ov"><h4>Стопка профилей</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/banner-warehouse.jpg" alt="Склад готовой продукции" /><div class="ov"><h4>Склад готовой продукции</h4></div></div>
+      <div class="gallery-item"><img src="assets/img/banner-line.jpg" alt="Гальваническая линия" /><div class="ov"><h4>Гальваническая линия</h4></div></div>
+    </div>
+  </section>
+
+  <!-- For whom -->
+  <section class="section" style="background: var(--bg-secondary); max-width:none; border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div style="max-width: var(--maxw); margin: 0 auto;">
+      <div class="section-header">
+        <div class="section-label">Кому подойдёт</div>
+        <h2>Для кого мы работаем</h2>
+        <p class="section-subtitle">Решаем задачи производственных предприятий, торговых компаний и подрядчиков</p>
+      </div>
+
+      <div class="cards-grid cols-3">
+        <div class="card"><div class="card-body">
+          <div class="card-icon">🏗️</div>
+          <h3>Строительные компании</h3>
+          <p>Цинкование крепежа, кронштейнов, закладных деталей и профильных конструкций для строительных объектов.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div class="card-icon">⚙️</div>
+          <h3>Машиностроение</h3>
+          <p>Защитные покрытия для деталей машин и механизмов — от мелких метизов до корпусных элементов.</p>
+        </div></div>
+        <div class="card"><div class="card-body">
+          <div class="card-icon">🛒</div>
+          <h3>Торговые компании</h3>
+          <p>Обработка партий метизов и крепежа для последующей реализации. Гарантируем стабильное качество от партии к партии.</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="text-align:center; padding-top:0;">
+    <div style="background: linear-gradient(135deg, var(--bg-card), var(--bg-elevated)); border:1px solid var(--border); border-radius:24px; padding: 60px 40px;">
+      <div class="section-label">Стоимость и сроки</div>
+      <h2 style="margin-top:8px; margin-bottom:18px;">Рассчитаем под <span class="accent">ваши изделия</span></h2>
+      <p class="section-subtitle" style="margin-bottom:32px;">Пришлите описание партии или чертежи — подготовим предложение в течение 1 рабочего дня</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="contacts.html#form" class="btn btn-primary">Оставить заявку →</a>
+        <a href="tel:+79622444000" class="btn btn-secondary">+7 (962) 244-40-00</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img src="assets/img/logo.png" alt="Профит ТГ" />
+          <span class="brand-text"><span class="name">ПРОФИТ ТГ</span><span class="tag">Цинкование металлов</span></span>
+        </a>
+        <p>Современное производство защитных цинковых покрытий в Твери. Полный цикл, собственная лаборатория, контроль ОТК.</p>
+      </div>
+      <div class="footer-col"><h5>Навигация</h5><ul><li><a href="index.html">Главная</a></li><li><a href="production.html">Производство</a></li><li><a href="services.html">Услуги</a></li><li><a href="contacts.html">Контакты</a></li></ul></div>
+      <div class="footer-col"><h5>Услуги</h5><ul><li><a href="services.html#white">Белое цинкование</a></li><li><a href="services.html#rainbow">Радужное цинкование</a></li><li><a href="services.html#examples">Примеры работ</a></li><li><a href="production.html">Технология</a></li></ul></div>
+      <div class="footer-col"><h5>Контакты</h5><ul><li><a href="tel:+79622444000">+7 (962) 244-40-00</a></li><li><a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a></li><li><a href="contacts.html">г. Тверь, Борихино поле, 7Е</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© <span id="year">2026</span> ПРОФИТ ТГ. Все права защищены.</p><p>Цинкование и защита металлов</p></div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

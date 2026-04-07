@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Контакты — Профит ТГ</title>
+  <meta name="description" content="Контакты ПРОФИТ ТГ: г. Тверь, ул. Борихино поле, 7Е. Телефон, email, схема проезда и форма обратной связи." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav" id="navbar">
+    <div class="nav-inner">
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.png" alt="Профит ТГ" />
+        <span class="brand-text">
+          <span class="name">ПРОФИТ ТГ</span>
+          <span class="tag">Цинкование и защита металлов</span>
+        </span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="production.html">Производство</a></li>
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="contacts.html" class="active">Контакты</a></li>
+      </ul>
+      <a href="#form" class="nav-cta">Оставить заявку</a>
+      <button class="mobile-menu-btn" onclick="toggleMenu()" id="menuBtn"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" onclick="toggleMenu()">Главная</a>
+    <a href="production.html" onclick="toggleMenu()">Производство</a>
+    <a href="services.html" onclick="toggleMenu()">Услуги</a>
+    <a href="contacts.html" class="active" onclick="toggleMenu()">Контакты</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="page-hero" style="min-height:50vh;">
+    <div class="page-hero-inner">
+      <div class="breadcrumbs"><a href="index.html">Главная</a><span class="sep">/</span><span>Контакты</span></div>
+      <h1>Связаться <span style="background:linear-gradient(135deg,var(--accent),#fff,var(--accent-secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">с&nbsp;нами</span></h1>
+      <p>Звоните, пишите или приезжайте на производство. Готовы обсудить любую задачу — от мелкой партии метизов до крупных промышленных заказов.</p>
+    </div>
+  </section>
+
+  <!-- Contacts -->
+  <section class="section">
+    <div class="contacts-grid">
+      <div class="contact-info">
+        <span class="section-label">Реквизиты</span>
+        <h2 style="font-size: clamp(28px, 3.5vw, 42px); margin: 12px 0 16px;">Готовы к сотрудничеству</h2>
+        <p style="color: var(--text-secondary); font-size: 16px; line-height: 1.7;">Свяжитесь с нами удобным способом — ответим в течение рабочего дня и подготовим индивидуальный расчёт.</p>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Телефон</h4>
+              <a href="tel:+79622444000">+7 (962) 244-40-00</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Адрес</h4>
+              <p>г. Тверь, ул. Борихино поле, 7Е</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕒</div>
+            <div>
+              <h4>Режим работы</h4>
+              <p>Пн–Пт, 9:00 — 18:00</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-container">
+        <iframe src="https://yandex.com/map-widget/v1/?ll=35.815013%2C56.834122&z=17&l=map&pt=35.815013%2C56.834122%2Cpm2rdm" allowfullscreen="true"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form -->
+  <section class="form-section" id="form">
+    <div class="section">
+      <div class="form-wrap">
+        <div class="form-info">
+          <span class="section-label">Заявка</span>
+          <h2>Оставьте <span class="accent">заявку</span></h2>
+          <p>Заполните короткую форму — мы свяжемся с вами в течение рабочего дня и подготовим индивидуальный расчёт стоимости обработки ваших изделий.</p>
+          <ul>
+            <li>Расчёт стоимости и сроков</li>
+            <li>Консультация технолога</li>
+            <li>Возможность пробной партии</li>
+            <li>Выезд на ваше производство</li>
+          </ul>
+        </div>
+
+        <form class="feedback-form" id="feedbackForm" novalidate>
+          <div class="field">
+            <label for="f-name">Имя *</label>
+            <input id="f-name" name="name" type="text" placeholder="Как к вам обращаться" required />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-phone">Телефон *</label>
+              <input id="f-phone" name="phone" type="tel" placeholder="+7 (___) ___-__-__" />
+            </div>
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-message">Опишите задачу</label>
+            <textarea id="f-message" name="message" placeholder="Тип изделий, объём партии, желаемые сроки..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="justify-content:center;">Отправить заявку →</button>
+          <div class="form-status"></div>
+          <p class="form-consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с политикой конфиденциальности.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img src="assets/img/logo.png" alt="Профит ТГ" />
+          <span class="brand-text"><span class="name">ПРОФИТ ТГ</span><span class="tag">Цинкование металлов</span></span>
+        </a>
+        <p>Современное производство защитных цинковых покрытий в Твери. Полный цикл, собственная лаборатория, контроль ОТК.</p>
+      </div>
+      <div class="footer-col"><h5>Навигация</h5><ul><li><a href="index.html">Главная</a></li><li><a href="production.html">Производство</a></li><li><a href="services.html">Услуги</a></li><li><a href="contacts.html">Контакты</a></li></ul></div>
+      <div class="footer-col"><h5>Услуги</h5><ul><li><a href="services.html#white">Белое цинкование</a></li><li><a href="services.html#rainbow">Радужное цинкование</a></li><li><a href="services.html#examples">Примеры работ</a></li><li><a href="production.html">Технология</a></li></ul></div>
+      <div class="footer-col"><h5>Контакты</h5><ul><li><a href="tel:+79622444000">+7 (962) 244-40-00</a></li><li><a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a></li><li><a href="contacts.html">г. Тверь, Борихино поле, 7Е</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© <span id="year">2026</span> ПРОФИТ ТГ. Все права защищены.</p><p>Цинкование и защита металлов</p></div>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

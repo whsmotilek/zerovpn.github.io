@@ -3,1915 +3,277 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Профит ТГ — Защитные цинковые покрытия</title>
-  <meta name="description" content="Современное производство защитных цинковых покрытий в Твери. Полный цикл, собственная лаборатория." />
+  <title>Профит ТГ — Цинкование и защита металлов в Твери</title>
+  <meta name="description" content="ПРОФИТ ТГ — современное производство защитных цинковых покрытий в Твери. Полный технологический цикл, собственная лаборатория и отдел ОТК." />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <style>
-    :root {
-      --bg-primary: #050505;
-      --bg-secondary: #0a0a0f;
-      --bg-card: #111118;
-      --bg-elevated: #1a1a24;
-      --accent: #00d4ff;
-      --accent-secondary: #0099cc;
-      --accent-warm: #ff6b35;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0b0;
-      --border: rgba(255, 255, 255, 0.08);
-      --glow: rgba(0, 212, 255, 0.3);
-      --font-display: 'Space Grotesk', sans-serif;
-      --font-body: 'Onest', sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-      font-weight: 400;
-    }
-
-    /* Typography - ONLY Space Grotesk and Onest */
-    h1, h2, h3, h4, h5, h6, .logo, .section-label, .btn, .stat-value, .metric-box .number, .step-number, .coating-tag, .contact-details a, .nav-links a, .mobile-nav a {
-      font-family: var(--font-display);
-    }
-
-    p, span, li, .stat-label, .metric-box .label, .section-subtitle, .hero-subtitle, .service-card p, .process-step p, .features-list li, .contact-details p, .contact-details h4, footer p {
-      font-family: var(--font-body);
-    }
-
-    /* Navigation */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 24px 40px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .nav.scrolled {
-      background: rgba(5, 5, 5, 0.85);
-      backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 40px;
-    }
-
-    .nav-inner {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #fff 0%, var(--accent) 50%, var(--accent-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-    }
-
-    .logo::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-
-    .nav.scrolled .logo::after {
-      transform: scaleX(1);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 40px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 500;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .nav-links a::before {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--accent);
-      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .nav-links a:hover::before {
-      width: 100%;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-      z-index: 1001;
-      border-radius: 8px;
-      transition: background 0.3s;
-    }
-
-    .mobile-menu-btn:hover {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .mobile-menu-btn span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--text-primary);
-      margin: 5px 0;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 2px;
-    }
-
-    .mobile-menu-btn.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-
-    .mobile-menu-btn.active span:nth-child(2) {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-
-    .mobile-menu-btn.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
-
-    /* Hero Section */
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background: 
-        radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(255, 107, 53, 0.05) 0%, transparent 40%),
-        var(--bg-primary);
-      padding-top: 100px;
-    }
-
-    .hero-grid {
-      position: relative;
-      z-index: 2;
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-text {
-      max-width: 640px;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 20px;
-      background: rgba(0, 212, 255, 0.08);
-      border: 1px solid rgba(0, 212, 255, 0.25);
-      border-radius: 50px;
-      font-size: 13px;
-      color: var(--accent);
-      margin-bottom: 32px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      animation: badgePulse 3s infinite;
-    }
-
-    @keyframes badgePulse {
-      0%, 100% { 
-        box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4);
-        border-color: rgba(0, 212, 255, 0.25);
-      }
-      50% { 
-        box-shadow: 0 0 20px 5px rgba(0, 212, 255, 0.1);
-        border-color: rgba(0, 212, 255, 0.5);
-      }
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 5.5vw, 72px);
-      font-weight: 700;
-      line-height: 1.05;
-      margin-bottom: 28px;
-      letter-spacing: -0.03em;
-    }
-
-    .hero h1 .line {
-      display: block;
-      overflow: hidden;
-    }
-
-    .hero h1 .line span {
-      display: block;
-      transform: translateY(100%);
-      animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .hero h1 .line:nth-child(2) span {
-      animation-delay: 0.1s;
-    }
-
-    .hero h1 .line:nth-child(3) span {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes slideUp {
-      to { transform: translateY(0); }
-    }
-
-    .hero h1 .accent {
-      background: linear-gradient(135deg, var(--accent) 0%, #fff 50%, var(--accent-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      position: relative;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-      color: var(--text-secondary);
-      margin-bottom: 40px;
-      line-height: 1.7;
-      max-width: 480px;
-      opacity: 0;
-      animation: fadeIn 0.8s 0.4s forwards;
-      font-weight: 400;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeIn 0.8s 0.6s forwards;
-    }
-
-    .stat-item {
-      padding: 24px;
-      background: rgba(17, 17, 24, 0.6);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
-    }
-
-    .stat-item:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.15);
-      background: rgba(17, 17, 24, 0.8);
-    }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--accent);
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 13px;
-      color: var(--text-secondary);
-      font-weight: 400;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeIn 0.8s 0.8s forwards;
-    }
-
-    .btn {
-      padding: 16px 32px;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: none;
-      letter-spacing: -0.01em;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-      color: #000;
-      box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      transition: left 0.5s;
-    }
-
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      background: rgba(0, 212, 255, 0.08);
-      transform: translateY(-2px);
-    }
-
-    /* 3D Canvas Container */
-    .canvas-wrapper {
-      position: relative;
-      height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #canvas-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-
-    /* Floating elements */
-    .float-element {
-      position: absolute;
-      padding: 12px 20px;
-      background: rgba(17, 17, 24, 0.9);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 13px;
-      color: var(--text-secondary);
-      backdrop-filter: blur(10px);
-      animation: float 6s ease-in-out infinite;
-    }
-
-    .float-element strong {
-      color: var(--accent);
-      display: block;
-      font-size: 16px;
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
-    .float-1 { top: 10%; left: 0; animation-delay: 0s; }
-    .float-2 { top: 60%; right: 0; animation-delay: 2s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-
-    /* Sections */
-    .section {
-      padding: 120px 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 80px;
-    }
-
-    .section-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--accent);
-      margin-bottom: 16px;
-      font-weight: 500;
-    }
-
-    .section h2 {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
-    }
-
-    .section-subtitle {
-      color: var(--text-secondary);
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto;
-      font-weight: 400;
-    }
-
-    /* Services Grid */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .service-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .service-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      border-color: rgba(0, 212, 255, 0.3);
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 212, 255, 0.1);
-    }
-
-    .service-card:hover::before {
-      opacity: 1;
-    }
-
-    .service-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .service-card:hover .service-image {
-      transform: scale(1.1);
-    }
-
-    .service-content {
-      padding: 28px;
-    }
-
-    .service-icon {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      font-size: 22px;
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      transition: all 0.3s;
-    }
-
-    .service-card:hover .service-icon {
-      transform: scale(1.1) rotate(5deg);
-      border-color: var(--accent);
-    }
-
-    .service-card h3 {
-      font-size: 20px;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .service-card p {
-      color: var(--text-secondary);
-      font-size: 14px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    /* Process Section */
-    .process-section {
-      background: var(--bg-secondary);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .process-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 50%, rgba(255, 107, 53, 0.03) 0%, transparent 50%);
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .process-step {
-      text-align: center;
-      padding: 32px 24px;
-      position: relative;
-      background: var(--bg-card);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .process-step.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .process-step:hover {
-      border-color: var(--accent);
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
-    }
-
-    .process-step::after {
-      content: '→';
-      position: absolute;
-      right: -20px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--accent);
-      font-size: 24px;
-      opacity: 0.2;
-    }
-
-    .process-step:last-child::after {
-      display: none;
-    }
-
-    .step-number {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-secondary) 100%);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      color: #000;
-      margin: 0 auto 20px;
-      font-size: 20px;
-      transition: all 0.3s;
-      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
-    }
-
-    .process-step:hover .step-number {
-      transform: scale(1.1) rotate(-5deg);
-      box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
-    }
-
-    .process-step h4 {
-      font-size: 17px;
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
-
-    .process-step p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-weight: 400;
-    }
-
-    /* Gallery Section */
-    .gallery-section {
-      background: var(--bg-primary);
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .gallery-item {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      border: 1px solid var(--border);
-      opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .gallery-item.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.1);
-    }
-
-    .gallery-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 24px;
-      background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .gallery-item:hover .gallery-overlay {
-      transform: translateY(0);
-    }
-
-    .gallery-overlay h4 {
-      font-size: 15px;
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Coatings */
-    .coatings-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-    }
-
-    .coating-card {
-      background: var(--bg-card);
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .coating-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .coating-card:hover {
-      transform: scale(1.02) translateY(-5px);
-      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
-      border-color: rgba(0, 212, 255, 0.2);
-    }
-
-    .coating-image {
-      height: 300px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .coating-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s;
-    }
-
-    .coating-card:hover .coating-image img {
-      transform: scale(1.08);
-    }
-
-    .coating-content {
-      padding: 32px;
-    }
-
-    .coating-tag {
-      display: inline-block;
-      padding: 8px 16px;
-      background: rgba(0, 212, 255, 0.1);
-      color: var(--accent);
-      border-radius: 20px;
-      font-size: 12px;
-      margin-bottom: 20px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .coating-card h3 {
-      font-size: 28px;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .coating-card > p {
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 24px;
-      font-weight: 400;
-    }
-
-    .features-list {
-      list-style: none;
-    }
-
-    .features-list li {
-      padding: 10px 0;
-      padding-left: 28px;
-      position: relative;
-      color: var(--text-secondary);
-      font-size: 14px;
-      transition: all 0.3s;
-      font-weight: 400;
-    }
-
-    .features-list li::before {
-      content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 700;
-      transition: transform 0.3s;
-    }
-
-    .coating-card:hover .features-list li::before {
-      transform: translateX(5px);
-    }
-
-    .coating-card:hover .features-list li {
-      color: var(--text-primary);
-    }
-
-    /* Quality Metrics */
-    .metrics-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
-      border-radius: 24px;
-      padding: 48px;
-      border: 1px solid var(--border);
-      margin-top: 80px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s;
-    }
-
-    .metrics-bar.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .metric-box {
-      text-align: center;
-      padding: 24px;
-      border-right: 1px solid var(--border);
-      transition: all 0.3s;
-    }
-
-    .metric-box:last-child {
-      border-right: none;
-    }
-
-    .metric-box:hover {
-      transform: translateY(-5px);
-    }
-
-    .metric-box .number {
-      font-size: 42px;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--accent) 0%, #fff 50%, var(--accent-secondary) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .metric-box .label {
-      font-size: 13px;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 500;
-    }
-
-    /* Contacts */
-    .contacts-section {
-      background: linear-gradient(180deg, var(--bg-primary) 0%, #0a0a15 100%);
-      border-top: 1px solid var(--border);
-    }
-
-    .contacts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .contact-info h2 {
-      font-size: 42px;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    .contact-info > p {
-      color: var(--text-secondary);
-      margin-bottom: 48px;
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 400;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 32px;
-      padding: 24px;
-      background: var(--bg-card);
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-    }
-
-    .contact-item:hover {
-      border-color: var(--accent);
-      transform: translateX(8px);
-    }
-
-    .contact-icon {
-      width: 52px;
-      height: 52px;
-      background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 212, 255, 0.05) 100%);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(0, 212, 255, 0.2);
-      flex-shrink: 0;
-      font-size: 20px;
-    }
-
-    .contact-details h4 {
-      font-size: 12px;
-      color: var(--text-secondary);
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-weight: 500;
-    }
-
-    .contact-details p, .contact-details a {
-      font-size: 18px;
-      color: var(--text-primary);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .contact-details a:hover {
-      color: var(--accent);
-    }
-
-    .map-container {
-      background: var(--bg-card);
-      border-radius: 28px;
-      overflow: hidden;
-      height: 500px;
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      position: relative;
-    }
-
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      filter: grayscale(100%) invert(92%) contrast(83%);
-    }
-
-    /* Footer */
-    footer {
-      padding: 48px 40px;
-      text-align: center;
-      border-top: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 14px;
-      background: var(--bg-secondary);
-    }
-
-    footer p {
-      opacity: 0.8;
-      font-weight: 400;
-    }
-
-    /* Mobile Navigation */
-    .mobile-nav {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(5, 5, 5, 0.98);
-      backdrop-filter: blur(20px);
-      z-index: 999;
-      padding: 120px 40px;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    .mobile-nav.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .mobile-nav a {
-      color: var(--text-primary);
-      text-decoration: none;
-      font-size: 32px;
-      font-weight: 600;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .mobile-nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background: var(--accent);
-      transition: width 0.3s;
-    }
-
-    .mobile-nav a:hover {
-      color: var(--accent);
-    }
-
-    .mobile-nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-      }
-
-      .hero-text {
-        max-width: 100%;
-        order: 2;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-      }
-
-      .hero-subtitle {
-        max-width: 100%;
-      }
-
-      .hero-stats {
-        max-width: 500px;
-        margin: 40px auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .canvas-wrapper {
-        order: 1;
-        height: 350px;
-        max-width: 500px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .float-element {
-        display: none;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-step::after {
-        display: none;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .coatings-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metrics-bar {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .metric-box {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .metric-box:nth-child(3), .metric-box:nth-child(4) {
-        border-bottom: none;
-      }
-
-      .contacts-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .map-container {
-        height: 350px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .hero {
-        padding-top: 100px;
-        min-height: auto;
-        padding-bottom: 80px;
-      }
-
-      .hero h1 {
-        font-size: 36px;
-        line-height: 1.1;
-      }
-
-      .hero h1 .line {
-        display: inline;
-      }
-
-      .hero-badge {
-        font-size: 12px;
-        padding: 8px 16px;
-        margin-bottom: 24px;
-      }
-
-      .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .stat-item {
-        padding: 16px;
-      }
-
-      .stat-value {
-        font-size: 22px;
-      }
-
-      .stat-label {
-        font-size: 12px;
-      }
-
-      .hero-buttons {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-        justify-content: center;
-        padding: 16px 24px;
-      }
-
-      .canvas-wrapper {
-        height: 280px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .service-image {
-        height: 180px;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 80px 20px;
-      }
-
-      .section h2 {
-        font-size: 28px;
-      }
-
-      .nav {
-        padding: 16px 20px;
-      }
-
-      .gallery-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metrics-bar {
-        grid-template-columns: 1fr;
-        padding: 32px 24px;
-        gap: 0;
-      }
-
-      .metric-box {
-        border-bottom: 1px solid var(--border);
-        border-right: none;
-        padding: 24px;
-      }
-
-      .metric-box:last-child {
-        border-bottom: none;
-      }
-
-      .metric-box .number {
-        font-size: 36px;
-      }
-
-      .coating-image {
-        height: 220px;
-      }
-
-      .coating-card h3 {
-        font-size: 24px;
-      }
-
-      .contact-info h2 {
-        font-size: 32px;
-      }
-
-      .contact-item {
-        padding: 20px;
-      }
-
-      .map-container {
-        height: 280px;
-        border-radius: 20px;
-      }
-
-      .mobile-nav a {
-        font-size: 28px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 32px;
-      }
-
-      .hero-subtitle {
-        font-size: 15px;
-      }
-
-      .hero-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-item {
-        padding: 20px;
-      }
-
-      .section h2 {
-        font-size: 26px;
-      }
-
-      .service-content, .coating-content {
-        padding: 24px;
-      }
-
-      .process-step {
-        padding: 24px;
-      }
-
-      .contact-info h2 {
-        font-size: 28px;
-      }
-
-      .contact-details p, .contact-details a {
-        font-size: 16px;
-      }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Onest:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
   <!-- Navigation -->
   <nav class="nav" id="navbar">
     <div class="nav-inner">
-      <div class="logo">ПРОФИТ ТГ</div>
+      <a class="brand" href="index.html">
+        <img src="assets/img/logo.png" alt="Профит ТГ" />
+        <span class="brand-text">
+          <span class="name">ПРОФИТ ТГ</span>
+          <span class="tag">Цинкование и защита металлов</span>
+        </span>
+      </a>
       <ul class="nav-links">
-        <li><a href="#services">Услуги</a></li>
-        <li><a href="#process">Процесс</a></li>
-        <li><a href="#gallery">Производство</a></li>
-        <li><a href="#coatings">Покрытия</a></li>
-        <li><a href="#contacts">Контакты</a></li>
+        <li><a href="index.html" class="active">Главная</a></li>
+        <li><a href="production.html">Производство</a></li>
+        <li><a href="services.html">Услуги</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
       </ul>
-      <button class="mobile-menu-btn" onclick="toggleMenu()" id="menuBtn">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <a href="contacts.html#form" class="nav-cta">Оставить заявку</a>
+      <button class="mobile-menu-btn" onclick="toggleMenu()" id="menuBtn"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- Mobile Navigation -->
   <div class="mobile-nav" id="mobileNav">
-    <a href="#services" onclick="toggleMenu()">Услуги</a>
-    <a href="#process" onclick="toggleMenu()">Процесс</a>
-    <a href="#gallery" onclick="toggleMenu()">Производство</a>
-    <a href="#coatings" onclick="toggleMenu()">Покрытия</a>
-    <a href="#contacts" onclick="toggleMenu()">Контакты</a>
+    <a href="index.html" class="active" onclick="toggleMenu()">Главная</a>
+    <a href="production.html" onclick="toggleMenu()">Производство</a>
+    <a href="services.html" onclick="toggleMenu()">Услуги</a>
+    <a href="contacts.html" onclick="toggleMenu()">Контакты</a>
   </div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-badge">
-          <span>⚡</span>
-          <span>Современное производство в Твери</span>
-        </div>
-        <h1>
-          <div class="line"><span>Защитные</span></div>
-          <div class="line"><span class="accent">цинковые</span></div>
-          <div class="line"><span>покрытия</span></div>
-        </h1>
-        <p class="hero-subtitle">
-          Полный технологический цикл нанесения защитных покрытий на металл. 
-          От подготовки до контроля качества — гарантируем долговечность.
-        </p>
-        
-        <div class="hero-stats">
-          <div class="stat-item">
-            <span class="stat-value">20 т</span>
-            <span class="stat-label">Производство в сутки</span>
+  <!-- Banner Slider -->
+  <section class="banner-slider">
+    <!-- Slide 1: Производство -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image: url('assets/img/banner-line.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <a class="slide-link" href="production.html" aria-label="Перейти на страницу Производство"></a>
+      <div class="slide-content">
+        <div class="slide-inner">
+          <span class="slide-tag">⚡ Современное производство в Твери</span>
+          <h2>Защитные <span class="accent">цинковые</span> покрытия</h2>
+          <p class="slide-desc">Полный технологический цикл нанесения защитных покрытий на металл. От подготовки до контроля качества — гарантируем долговечность.</p>
+          <div class="slide-cta">
+            <a href="production.html" class="btn btn-primary">Наше производство →</a>
           </div>
-          <div class="stat-item">
-            <span class="stat-value">3 м</span>
-            <span class="stat-label">Макс. длина деталей</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">500 кг</span>
-            <span class="stat-label">Грузоподъёмность</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-value">1000 м²</span>
-            <span class="stat-label">Производственная площадь</span>
-          </div>
-        </div>
-
-        <div class="hero-buttons">
-          <a href="#contacts" class="btn btn-primary">Рассчитать стоимость →</a>
-          <a href="#process" class="btn btn-secondary">Смотреть процесс</a>
         </div>
       </div>
-      
-      <div class="canvas-wrapper">
-        <div id="canvas-container"></div>
-        <div class="float-element float-1">
-          Точность покрытия
-          <strong>±1 мкм</strong>
+    </div>
+
+    <!-- Slide 2: Услуги -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image: url('assets/img/banner-chains.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <a class="slide-link" href="services.html" aria-label="Перейти на страницу Услуги"></a>
+      <div class="slide-content">
+        <div class="slide-inner">
+          <span class="slide-tag">🔧 Полный цикл обработки</span>
+          <h2>Гальваническое <span class="accent">цинкование</span> деталей</h2>
+          <p class="slide-desc">Автоматизированная линия с точным контролем температуры, плотности тока и времени обработки. Соответствие ГОСТ 9.301-86.</p>
+          <div class="slide-cta">
+            <a href="services.html" class="btn btn-primary">Наши услуги →</a>
+          </div>
         </div>
-        <div class="float-element float-2">
-          ГОСТ 9.301-86
-          <strong>Соответствие</strong>
+      </div>
+    </div>
+
+    <!-- Slide 3: Готовая продукция -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image: url('assets/img/banner-hanging.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <a class="slide-link" href="services.html#examples" aria-label="Примеры готовой продукции"></a>
+      <div class="slide-content">
+        <div class="slide-inner">
+          <span class="slide-tag">✓ Контроль качества ОТК</span>
+          <h2>Цинкование <span class="accent">крепежа</span> и метизов</h2>
+          <p class="slide-desc">Обработка партий любого объёма — от мелкого крепежа до крупногабаритных конструкций. Грузоподъёмность до 500 кг.</p>
+          <div class="slide-cta">
+            <a href="services.html#examples" class="btn btn-primary">Примеры работ →</a>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Контакты -->
+    <div class="slide">
+      <div class="slide-bg" style="background-image: url('assets/img/banner-warehouse.jpg');"></div>
+      <div class="slide-overlay"></div>
+      <a class="slide-link" href="contacts.html" aria-label="Перейти на страницу Контакты"></a>
+      <div class="slide-content">
+        <div class="slide-inner">
+          <span class="slide-tag">📍 г. Тверь</span>
+          <h2>Готовы к <span class="accent">сотрудничеству</span></h2>
+          <p class="slide-desc">Оставьте заявку, и мы подготовим индивидуальный расчёт стоимости обработки ваших изделий. Профильные конструкции, метизы, нестандарт.</p>
+          <div class="slide-cta">
+            <a href="contacts.html#form" class="btn btn-primary">Оставить заявку →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="slider-controls">
+      <div class="slider-dots">
+        <button class="slider-dot" aria-label="Слайд 1"></button>
+        <button class="slider-dot" aria-label="Слайд 2"></button>
+        <button class="slider-dot" aria-label="Слайд 3"></button>
+        <button class="slider-dot" aria-label="Слайд 4"></button>
+      </div>
+      <div class="slider-arrows">
+        <button class="slider-arrow prev" aria-label="Предыдущий">‹</button>
+        <button class="slider-arrow next" aria-label="Следующий">›</button>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section class="section" id="services">
+  <!-- Stats Bar -->
+  <div class="stats-wrap" style="padding: 0 40px;">
+    <div class="stats-bar">
+      <div class="stat-cell"><div class="num">1000 м²</div><div class="lbl">Площадь цеха</div></div>
+      <div class="stat-cell"><div class="num">20 т/сут</div><div class="lbl">Производительность</div></div>
+      <div class="stat-cell"><div class="num">3 м</div><div class="lbl">Макс. длина детали</div></div>
+      <div class="stat-cell"><div class="num">500 кг</div><div class="lbl">Грузоподъёмность</div></div>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section">
     <div class="section-header">
-      <div class="section-label">Наши услуги</div>
-      <h2>Полный цикл цинкования</h2>
-      <p class="section-subtitle">
-        От приёмки сырья до упаковки готовой продукции — контролируем каждый этап
-      </p>
+      <div class="section-label">О компании</div>
+      <h2>Современное производство <span class="accent">в&nbsp;Твери</span></h2>
+      <p class="section-subtitle">ПРОФИТ ТГ — современное производство защитных цинковых покрытий с полным технологическим циклом, собственной лабораторией и отделом ОТК.</p>
     </div>
-    
-    <div class="services-grid">
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/c277951d4b879bbd6b0a4816e74555ae4d3b474c.webp" alt="Подготовка деталей" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">🔧</div>
-          <h3>Подготовка деталей</h3>
-          <p>Щелочное обезжиривание, травление и активация поверхности для идеальной адгезии покрытия</p>
+
+    <div class="cards-grid cols-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon">⚙️</div>
+          <h3>Полный цикл</h3>
+          <p>От приёмки сырья и подготовки поверхности до пассивации, сушки и упаковки готовой продукции — весь процесс под одной крышей.</p>
         </div>
       </div>
-      
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/image.made-in-china.com/27496f5a009af9e182f3709065f50fee7784893d.webp" alt="Гальваническое покрытие" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">⚡</div>
-          <h3>Гальваническое покрытие</h3>
-          <p>Автоматизированная линия с точным контролем температуры, плотности тока и времени обработки</p>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon">🔬</div>
+          <h3>Своя лаборатория</h3>
+          <p>Контроль химического состава растворов, измерение толщины и адгезии покрытия. Каждая партия проходит проверку.</p>
         </div>
       </div>
-      
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/www.proquimia.com/a3a5c62cfad843f67fa4b139778d62c91e30b5b4.jpg" alt="Пассивация" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">🛡️</div>
-          <h3>Пассивация</h3>
-          <p>Финальная обработка для повышения коррозионной стойкости и задания цвета покрытия</p>
-        </div>
-      </div>
-      
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/thepipefitting.com/7fc1885738721a4a1508b0c998b8a238aae8e98a.jpg" alt="Лабораторный контроль" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">🔬</div>
-          <h3>Лабораторный контроль</h3>
-          <p>Анализ химического состава, измерение толщины и адгезии покрытия толщиномером</p>
-        </div>
-      </div>
-      
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/www.palmequipment.com/7389c400a1816b34e7045bf5aa6bde80a885226b.jpg" alt="Упаковка и логистика" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">📦</div>
-          <h3>Упаковка и логистика</h3>
-          <p>Маркировка, защитная упаковка и отгрузка готовой продукции с полным пакетом документов</p>
-        </div>
-      </div>
-      
-      <div class="service-card">
-        <img src="https://kimi-web-img.moonshot.cn/img/galvanizeit.org/08619eaafb2f527d0207556331e183ada405d476.gif" alt="Отдел ОТК" class="service-image">
-        <div class="service-content">
-          <div class="service-icon">✓</div>
-          <h3>Отдел ОТК</h3>
-          <p>Визуальный контроль каждой партии на отсутствие дефектов, потёков и непокрытых участков</p>
+      <div class="card">
+        <div class="card-body">
+          <div class="card-icon">✓</div>
+          <h3>ОТК и ГОСТ</h3>
+          <p>Визуальный и инструментальный контроль каждой партии. Соответствие ГОСТ 9.301-86 и ISO стандартам качества.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Process Section -->
-  <section class="process-section" id="process">
-    <div class="section">
+  <!-- Quick Services -->
+  <section class="section" style="background: var(--bg-secondary); max-width: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <div style="max-width: var(--maxw); margin: 0 auto;">
       <div class="section-header">
-        <div class="section-label">Технология</div>
-        <h2>7 этапов идеального покрытия</h2>
-        <p class="section-subtitle">
-          Многоэтапный процесс с соблюдением ГОСТ 9.301-86
-        </p>
+        <div class="section-label">Что мы делаем</div>
+        <h2>Услуги цинкования</h2>
+        <p class="section-subtitle">Два основных типа покрытий для разных условий эксплуатации и областей применения</p>
       </div>
-      
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="step-number">1</div>
-          <h4>Обезжиривание</h4>
-          <p>Щелочная очистка от масел и загрязнений</p>
+
+      <div class="cards-grid cols-2">
+        <div class="coating-card">
+          <div class="img"><img src="assets/img/gal-fasteners.jpg" alt="Белое цинкование" /></div>
+          <div class="coating-body">
+            <span class="coating-tag">Классическое</span>
+            <h3>Белое цинкование</h3>
+            <p>Классическое защитное покрытие с высокой коррозионной стойкостью. Серебристо-белый оттенок, равномерное нанесение, экономичное решение для защиты металла в агрессивных средах.</p>
+            <ul class="feat-list">
+              <li>Серебристо-белый цвет</li>
+              <li>Высокая стойкость к коррозии</li>
+              <li>Равномерное покрытие</li>
+            </ul>
+          </div>
         </div>
-        
-        <div class="process-step">
-          <div class="step-number">2</div>
-          <h4>Промывка</h4>
-          <p>Смыв остатков обезжиривающего раствора</p>
+        <div class="coating-card">
+          <div class="img"><img src="assets/img/gal-profiles-brass.jpg" alt="Радужное цинкование" /></div>
+          <div class="coating-body">
+            <span class="coating-tag warm">Премиум</span>
+            <h3>Радужное цинкование</h3>
+            <p>Декоративное покрытие с эффектом перламутра. Сочетает эстетичный внешний вид с повышенной защитой от коррозии — идеально для изделий, где важна не только функция, но и внешний вид.</p>
+            <ul class="feat-list">
+              <li>Перламутровый эффект</li>
+              <li>Разнообразие оттенков</li>
+              <li>Повышенная защита</li>
+            </ul>
+          </div>
         </div>
-        
-        <div class="process-step">
-          <div class="step-number">3</div>
-          <h4>Травление</h4>
-          <p>Активация поверхности металла</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">4</div>
-          <h4>Активация</h4>
-          <p>Подготовка к цинкованию</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">5</div>
-          <h4>Цинкование</h4>
-          <p>Нанесение защитного слоя</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">6</div>
-          <h4>Пассивация</h4>
-          <p>Стабилизация покрытия</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">7</div>
-          <h4>Сушка</h4>
-          <p>Финальная обработка</p>
-        </div>
-        
-        <div class="process-step">
-          <div class="step-number">✓</div>
-          <h4>Контроль</h4>
-          <p>Проверка качества ОТК</p>
-        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="services.html" class="btn btn-secondary">Все услуги →</a>
       </div>
     </div>
   </section>
 
-  <!-- Gallery Section -->
-  <section class="section gallery-section" id="gallery">
+  <!-- CTA -->
+  <section class="section" style="text-align: center;">
     <div class="section-header">
-      <div class="section-label">Производство</div>
-      <h2>Наши мощности</h2>
-      <p class="section-subtitle">
-        Современное оборудование и автоматизированные линии
-      </p>
+      <div class="section-label">Сотрудничество</div>
+      <h2>Рассчитаем стоимость <span class="accent">за&nbsp;1&nbsp;день</span></h2>
+      <p class="section-subtitle">Оставьте заявку — пришлём индивидуальный расчёт под ваши изделия</p>
     </div>
-    
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="https://kimi-web-img.moonshot.cn/img/media.defense.gov/eb515ab7f69e37f9e771311d53ea0b06e123d41f.JPG" alt="Цинковальные ванны">
-        <div class="gallery-overlay">
-          <h4>Цинковальные ванны</h4>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://kimi-web-img.moonshot.cn/img/galvanizeit.org/95ec4d37e688269175d5ff16c6025fa42a4d26d9.gif" alt="Навеска деталей">
-        <div class="gallery-overlay">
-          <h4>Навеска деталей</h4>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://kimi-web-img.moonshot.cn/img/www.hbjinyong.com/19df5eb6fd62c09a63fe4460b28334242a5dc768.jpg" alt="Горячее цинкование">
-        <div class="gallery-overlay">
-          <h4>Горячее цинкование</h4>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="https://kimi-web-img.moonshot.cn/img/www.uskoreahotlink.com/561729231ffadd9b4304f39e66251ed490f6400d.jpg" alt="Автоматическая линия">
-        <div class="gallery-overlay">
-          <h4>Автоматическая линия</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Coatings Section -->
-  <section class="section" id="coatings">
-    <div class="section-header">
-      <div class="section-label">Виды покрытий</div>
-      <h2>Выберите тип цинкования</h2>
-      <p class="section-subtitle">
-        Два основных типа покрытий для различных условий эксплуатации
-      </p>
-    </div>
-    
-    <div class="coatings-grid">
-      <div class="coating-card">
-        <div class="coating-image">
-          <img src="https://kimi-web-img.moonshot.cn/img/www.runsom.com/b3ee93cd9db4df0c1f7e518d3d922a40d87f649a.png" alt="Белое цинкование" />
-        </div>
-        <div class="coating-content">
-          <span class="coating-tag">Классическое</span>
-          <h3>Белое цинкование</h3>
-          <p>Классическое защитное покрытие с высокой коррозионной стойкостью. Обеспечивает равномерную защиту в агрессивных средах.</p>
-          <ul class="features-list">
-            <li>Серебристо-белый цвет</li>
-            <li>Высокая стойкость к коррозии</li>
-            <li>Равномерное покрытие</li>
-            <li>Экономичное решение</li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="coating-card">
-        <div class="coating-image">
-          <img src="https://kimi-web-img.moonshot.cn/img/static.wixstatic.com/d8db6197e517ff51c7645b7c517efa394de030da.png" alt="Радужное цинкование" />
-        </div>
-        <div class="coating-content">
-          <span class="coating-tag" style="background: rgba(255, 100, 200, 0.1); color: #ff64c8;">Премиум</span>
-          <h3>Радужное цинкование</h3>
-          <p>Декоративное покрытие с эффектом перламутра. Сочетает эстетичный внешний вид с повышенной защитой.</p>
-          <ul class="features-list">
-            <li>Перламутровый эффект</li>
-            <li>Разнообразие оттенков</li>
-            <li>Повышенная защита</li>
-            <li>Декоративный вид</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="metrics-bar">
-      <div class="metric-box">
-        <div class="number">±1 мкм</div>
-        <div class="label">Точность толщины</div>
-      </div>
-      <div class="metric-box">
-        <div class="number">100%</div>
-        <div class="label">Контроль параметров</div>
-      </div>
-      <div class="metric-box">
-        <div class="number">ISO</div>
-        <div class="label">Стандарт качества</div>
-      </div>
-      <div class="metric-box">
-        <div class="number">ГОСТ</div>
-        <div class="label">9.301-86</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contacts Section -->
-  <section class="section contacts-section" id="contacts">
-    <div class="contacts-grid">
-      <div class="contact-info">
-        <div class="section-label">Контакты</div>
-        <h2>Готовы к сотрудничеству</h2>
-        <p>Оставьте заявку, и мы подготовим индивидуальный расчёт стоимости обработки ваших изделий</p>
-        
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div class="contact-details">
-            <h4>Телефон</h4>
-            <a href="tel:+79622444000">+7 (962) 244-40-00</a>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div class="contact-details">
-            <h4>Email</h4>
-            <a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a>
-          </div>
-        </div>
-        
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div class="contact-details">
-            <h4>Адрес</h4>
-            <p>г. Тверь, ул. Борихино поле, 7Е</p>
-          </div>
-        </div>
-
-        <a href="tel:+79622444000" class="btn btn-primary" style="margin-top: 20px;">Позвонить сейчас</a>
-      </div>
-      
-      <div class="map-container">
-        <iframe src="https://yandex.com/map-widget/v1/?ll=35.815013%2C56.834122&z=17&l=map&pt=35.815013%2C56.834122%2Cpm2rdm" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
-      </div>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="contacts.html#form" class="btn btn-primary">Оставить заявку →</a>
+      <a href="tel:+79622444000" class="btn btn-secondary">+7 (962) 244-40-00</a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>© 2024 Профит ТГ. Все права защищены. Современное производство защитных цинковых покрытий.</p>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img src="assets/img/logo.png" alt="Профит ТГ" />
+          <span class="brand-text">
+            <span class="name">ПРОФИТ ТГ</span>
+            <span class="tag">Цинкование металлов</span>
+          </span>
+        </a>
+        <p>Современное производство защитных цинковых покрытий в Твери. Полный цикл, собственная лаборатория, контроль ОТК.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Навигация</h5>
+        <ul>
+          <li><a href="index.html">Главная</a></li>
+          <li><a href="production.html">Производство</a></li>
+          <li><a href="services.html">Услуги</a></li>
+          <li><a href="contacts.html">Контакты</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Услуги</h5>
+        <ul>
+          <li><a href="services.html#white">Белое цинкование</a></li>
+          <li><a href="services.html#rainbow">Радужное цинкование</a></li>
+          <li><a href="services.html#examples">Примеры работ</a></li>
+          <li><a href="production.html">Технология</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Контакты</h5>
+        <ul>
+          <li><a href="tel:+79622444000">+7 (962) 244-40-00</a></li>
+          <li><a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a></li>
+          <li><a href="contacts.html">г. Тверь, Борихино поле, 7Е</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> ПРОФИТ ТГ. Все права защищены.</p>
+      <p>Цинкование и защита металлов</p>
+    </div>
   </footer>
 
-  <script>
-    // Navigation scroll effect
-    window.addEventListener('scroll', () => {
-      const navbar = document.getElementById('navbar');
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Mobile menu toggle
-    function toggleMenu() {
-      const mobileNav = document.getElementById('mobileNav');
-      const menuBtn = document.getElementById('menuBtn');
-      mobileNav.classList.toggle('active');
-      menuBtn.classList.toggle('active');
-      document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-    }
-
-    // Close mobile menu on resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 768) {
-        const mobileNav = document.getElementById('mobileNav');
-        const menuBtn = document.getElementById('menuBtn');
-        mobileNav.classList.remove('active');
-        menuBtn.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.service-card, .process-step, .gallery-item, .coating-card, .metrics-bar').forEach(el => {
-      observer.observe(el);
-    });
-
-    // Three.js 3D Animation - Molecular Structure (without connection lines)
-    const container = document.getElementById('canvas-container');
-    
-    // Check if not mobile
-    const isMobile = window.matchMedia('(pointer: coarse)').matches;
-    
-    if (!isMobile && container) {
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-      
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      container.appendChild(renderer.domElement);
-
-      // Create group for all objects
-      const group = new THREE.Group();
-      scene.add(group);
-
-      // Central sphere (Zinc atom)
-      const coreGeo = new THREE.SphereGeometry(0.8, 32, 32);
-      const coreMat = new THREE.MeshPhysicalMaterial({
-        color: 0x00d4ff,
-        metalness: 0.9,
-        roughness: 0.1,
-        clearcoat: 1.0,
-        emissive: 0x004466,
-        emissiveIntensity: 0.3
-      });
-      const core = new THREE.Mesh(coreGeo, coreMat);
-      group.add(core);
-
-      // Orbiting spheres (smaller atoms/particles)
-      const particleCount = 6;
-      const particles = [];
-      const orbitRadius = 2.2;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const angle = (i / particleCount) * Math.PI * 2;
-        const particleGeo = new THREE.SphereGeometry(0.25, 16, 16);
-        const particleMat = new THREE.MeshPhysicalMaterial({
-          color: 0xffffff,
-          metalness: 0.8,
-          roughness: 0.2,
-          emissive: 0x00d4ff,
-          emissiveIntensity: 0.2
-        });
-        const particle = new THREE.Mesh(particleGeo, particleMat);
-        
-        // Position in circle
-        particle.position.x = Math.cos(angle) * orbitRadius;
-        particle.position.y = Math.sin(angle) * orbitRadius;
-        particle.position.z = 0;
-        
-        particle.userData = {
-          angle: angle,
-          speed: 0.5 + Math.random() * 0.5,
-          yOffset: Math.random() * Math.PI * 2
-        };
-        
-        group.add(particle);
-        particles.push(particle);
-      }
-
-      // Outer glowing ring
-      const ringGeo = new THREE.TorusGeometry(3.2, 0.03, 16, 100);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0x00d4ff,
-        transparent: true,
-        opacity: 0.2
-      });
-      const ring = new THREE.Mesh(ringGeo, ringMat);
-      group.add(ring);
-
-      // Second ring (different angle)
-      const ring2 = new THREE.Mesh(ringGeo, ringMat);
-      ring2.rotation.x = Math.PI / 2;
-      group.add(ring2);
-
-      // Floating particles in background
-      const floatGeo = new THREE.BufferGeometry();
-      const floatCount = 30;
-      const floatPos = new Float32Array(floatCount * 3);
-      
-      for (let i = 0; i < floatCount * 3; i++) {
-        floatPos[i] = (Math.random() - 0.5) * 10;
-      }
-      
-      floatGeo.setAttribute('position', new THREE.BufferAttribute(floatPos, 3));
-      const floatMat = new THREE.PointsMaterial({
-        size: 0.05,
-        color: 0x00d4ff,
-        transparent: true,
-        opacity: 0.4
-      });
-      const floatParticles = new THREE.Points(floatGeo, floatMat);
-      group.add(floatParticles);
-
-      // Lighting - NO POINT LIGHTS
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-      scene.add(ambientLight);
-
-      const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
-      dirLight1.position.set(5, 5, 5);
-      scene.add(dirLight1);
-
-      const dirLight2 = new THREE.DirectionalLight(0x00d4ff, 0.8);
-      dirLight2.position.set(-5, -5, 5);
-      scene.add(dirLight2);
-
-      camera.position.z = 6;
-
-      // Mouse interaction
-      let mouseX = 0;
-      let mouseY = 0;
-      let targetX = 0;
-      let targetY = 0;
-
-      document.addEventListener('mousemove', (event) => {
-        const rect = container.getBoundingClientRect();
-        if (event.clientX >= rect.left && event.clientX <= rect.right &&
-            event.clientY >= rect.top && event.clientY <= rect.bottom) {
-          mouseX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-          mouseY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-        }
-      });
-
-      // Animation
-      let time = 0;
-      function animate() {
-        requestAnimationFrame(animate);
-        time += 0.01;
-
-        targetX = mouseX * 0.3;
-        targetY = mouseY * 0.3;
-
-        // Smooth rotation of main group
-        group.rotation.y += 0.003;
-        group.rotation.x += 0.001;
-
-        // Mouse follow
-        group.rotation.y += 0.03 * (targetX - group.rotation.y * 0.1);
-        group.rotation.x += 0.03 * (targetY - group.rotation.x * 0.1);
-
-        // Animate core (pulse)
-        const coreScale = 1 + Math.sin(time * 2) * 0.05;
-        core.scale.setScalar(coreScale);
-        core.material.emissiveIntensity = 0.3 + Math.sin(time * 3) * 0.1;
-
-        // Animate orbiting particles
-        particles.forEach((particle, i) => {
-          // Update angle
-          particle.userData.angle += 0.01 * particle.userData.speed;
-          
-          // Calculate new position
-          const r = orbitRadius + Math.sin(time + particle.userData.yOffset) * 0.2;
-          particle.position.x = Math.cos(particle.userData.angle) * r;
-          particle.position.y = Math.sin(particle.userData.angle) * r;
-          particle.position.z = Math.sin(time + particle.userData.yOffset) * 0.5;
-          
-          // Rotate particle
-          particle.rotation.x += 0.02;
-          particle.rotation.y += 0.02;
-        });
-
-        // Rotate rings
-        ring.rotation.z += 0.005;
-        ring2.rotation.x += 0.003;
-
-        // Animate floating particles
-        floatParticles.rotation.y += 0.001;
-
-        renderer.render(scene, camera);
-      }
-
-      animate();
-
-      // Resize handler
-      let resizeTimeout;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-          if (container.clientWidth > 0 && container.clientHeight > 0) {
-            camera.aspect = container.clientWidth / container.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(container.clientWidth, container.clientHeight);
-          }
-        }, 250);
-      });
-    }
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
