@@ -701,8 +701,8 @@ footer {
   .slider-dot { width: 30px; height: 3px; }
 
   /* Stats */
-  .stats-wrap { padding: 0 18px; }
-  .stats-bar { grid-template-columns: 1fr 1fr; margin-top: -32px; border-radius: 18px; }
+  .stats-wrap { padding: 24px 18px 0; }
+  .stats-bar { grid-template-columns: 1fr 1fr; margin-top: 0; border-radius: 18px; }
   .stat-cell { padding: 22px 14px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
   .stat-cell:nth-child(2n) { border-right: none; }
   .stat-cell:nth-child(3), .stat-cell:nth-child(4) { border-bottom: none; }
@@ -801,8 +801,8 @@ footer {
   .slider-controls { bottom: 22px; padding: 0 16px; }
   .slider-dot { width: 24px; }
 
-  .stats-wrap { padding: 0 16px; }
-  .stats-bar { grid-template-columns: 1fr; margin-top: -28px; border-radius: 16px; }
+  .stats-wrap { padding: 20px 16px 0; }
+  .stats-bar { grid-template-columns: 1fr; margin-top: 0; border-radius: 16px; }
   .stat-cell { border-right: none !important; border-bottom: 1px solid var(--border) !important; padding: 20px 16px; }
   .stat-cell:last-child { border-bottom: none !important; }
   .stat-cell .num { font-size: 28px; }
