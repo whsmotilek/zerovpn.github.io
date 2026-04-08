@@ -90,15 +90,32 @@ document.querySelectorAll('.card, .process-step, .gallery-item, .coating-card, .
   const form = document.getElementById('feedbackForm');
   if (!form) return;
   const status = form.querySelector('.form-status');
+  const consentLabel = form.querySelector('.consent-check');
+  const consentBox = form.querySelector('#f-consent');
+  if (consentBox) {
+    consentBox.addEventListener('change', () => {
+      if (consentBox.checked) consentLabel.classList.remove('error');
+    });
+  }
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(form);
     const name = (data.get('name') || '').toString().trim();
     const phone = (data.get('phone') || '').toString().trim();
     const email = (data.get('email') || '').toString().trim();
+    const consent = consentBox && consentBox.checked;
+
     if (!name || (!phone && !email)) {
       status.className = 'form-status error';
       status.textContent = 'Заполните имя и телефон или email.';
+      return;
+    }
+    if (!consent) {
+      status.className = 'form-status error';
+      status.textContent = 'Необходимо согласие на обработку персональных данных.';
+      consentLabel && consentLabel.classList.add('error');
+      consentLabel && consentLabel.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     // здесь должен быть реальный POST на ваш бекенд / mailto-fallback

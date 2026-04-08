@@ -131,9 +131,15 @@
             <label for="f-message">Опишите задачу</label>
             <textarea id="f-message" name="message" placeholder="Тип изделий, объём партии, желаемые сроки..."></textarea>
           </div>
+          <label class="consent-check">
+            <input type="checkbox" id="f-consent" name="consent" required />
+            <span class="consent-box" aria-hidden="true"></span>
+            <span class="consent-text">
+              Отправляя свои данные, я соглашаюсь на обработку персональных данных в соотв. с ФЗ от 27.07.2006 №152-ФЗ на условиях и для целей, определённых <a href="personal.html" target="_blank" rel="noopener">согласием на обработку персональных данных</a> и <a href="privacy.html" target="_blank" rel="noopener">Политикой конфиденциальности</a>. <span class="req">*</span>
+            </span>
+          </label>
           <button type="submit" class="btn btn-primary" style="justify-content:center;">Отправить заявку →</button>
           <div class="form-status"></div>
-          <p class="form-consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных в соответствии с политикой конфиденциальности.</p>
         </form>
       </div>
     </div>
@@ -152,7 +158,10 @@
       <div class="footer-col"><h5>Услуги</h5><ul><li><a href="services.html#white">Белое цинкование</a></li><li><a href="services.html#rainbow">Радужное цинкование</a></li><li><a href="services.html#examples">Примеры работ</a></li><li><a href="production.html">Технология</a></li></ul></div>
       <div class="footer-col"><h5>Контакты</h5><ul><li><a href="tel:+79622444000">+7 (962) 244-40-00</a></li><li><a href="mailto:ProfitGalvanika@yandex.ru">ProfitGalvanika@yandex.ru</a></li><li><a href="contacts.html">г. Тверь, Борихино поле, 7Е</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>© <span id="year">2026</span> ПРОФИТ ТГ. Все права защищены.</p><p>Цинкование и защита металлов</p></div>
+    <div class="footer-bottom">
+      <p>© <span id="year">2026</span> ПРОФИТ ТГ. Все права защищены.</p>
+      <p class="footer-legal"><a href="privacy.html">Политика конфиденциальности</a> · <a href="personal.html">Согласие на обработку ПД</a></p>
+    </div>
   </footer>
 
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
